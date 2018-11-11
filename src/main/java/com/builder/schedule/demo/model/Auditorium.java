@@ -15,28 +15,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "YEAR_GROUP")
-public class Group extends BaseEntity {
+@Table(name = "AUDITORIUM")
+public class Auditorium {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "type")
-    private String type;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "year_id", nullable = false)
-    private Year year;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "group")
+    @JoinColumn(name = "building_id", nullable = false)
+    private Building building;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "auditorium")
     private Set<Lecture> lectures = new HashSet<>();
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -49,20 +45,12 @@ public class Group extends BaseEntity {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public Building getBuilding() {
+        return building;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Year getYear() {
-        return year;
-    }
-
-    public void setYear(Year year) {
-        this.year = year;
+    public void setBuilding(Building building) {
+        this.building = building;
     }
 
     public Set<Lecture> getLectures() {
