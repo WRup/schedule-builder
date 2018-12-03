@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+
+<h1>Spring Boot file upload example</h1>
+
+<form method="POST" action="/uploadExcelFile" enctype="multipart/form-data">
+    <input type="file" name="file"/><br/><br/>
+    <input type="submit" value="Submit"/>
+    <br/>
+    <h2 th:text="${message}"></h2>
+</form>
+
+<form action="/readPOI">
+    <input type="submit" value="Display file content"/>
+
+    <br/>
+    <br/>
+
+    <table class="table table-striped">
+        <tbody>
+        <tr th:text="${data}">
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

@@ -41,8 +41,14 @@ public class Lecture extends BaseEntity {
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "auditorium_id", nullable = false)
+    @JoinColumn(name = "auditorium_id")
     private Auditorium auditorium;
+
+    public Lecture(Group group, Worker worker, Subject subject) {
+        this.group = group;
+        this.worker = worker;
+        this.subject = subject;
+    }
 
     @Override
     public Long getId() {
