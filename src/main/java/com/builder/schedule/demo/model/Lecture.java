@@ -32,22 +32,20 @@ public class Lecture extends BaseEntity {
     @Column(name = "day_of_week")
     private Days days;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "year_group_id", nullable = false)
+    @JoinColumn(name = "year_group_id")
     private Group group;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "worker_id", nullable = false)
-    private Worker worker;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id", nullable = false)
-    private Subject subject;
+    @JoinColumn(name = "worker_subject_id", nullable = false)
+    private WorkerInSubject workerInSubject;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "auditorium_id")
     private Auditorium auditorium;
 
-    public Lecture(Group group, Worker worker, Subject subject) {
-        this.group = group;
-        this.worker = worker;
-        this.subject = subject;
+    public Lecture(WorkerInSubject workerInSubject) {
+        this.workerInSubject = workerInSubject;
+    }
+
+    public Lecture() {
     }
 
     @Override
@@ -84,27 +82,19 @@ public class Lecture extends BaseEntity {
         this.group = group;
     }
 
-    public Worker getWorker() {
-        return worker;
-    }
-
-    public void setWorker(Worker worker) {
-        this.worker = worker;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
     public Auditorium getAuditorium() {
         return auditorium;
     }
 
     public void setAuditorium(Auditorium auditorium) {
         this.auditorium = auditorium;
+    }
+
+    public WorkerInSubject getWorkerInSubject() {
+        return workerInSubject;
+    }
+
+    public void setWorkerInSubject(WorkerInSubject workerInSubject) {
+        this.workerInSubject = workerInSubject;
     }
 }

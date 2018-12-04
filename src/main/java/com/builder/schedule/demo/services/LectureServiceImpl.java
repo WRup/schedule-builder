@@ -18,7 +18,7 @@ public class LectureServiceImpl implements LectureService {
 
     @Override
     public Set<Lecture> findAll() {
-        return null;
+        return lectureRepository.findAll();
     }
 
     @Override

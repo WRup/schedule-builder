@@ -8,8 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "SUBJECT")
@@ -22,8 +24,12 @@ public class Subject extends BaseEntity {
     private String name;
     @Column(name = "type")
     private String type;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "subject")
-    private Lecture lecture;
+    @Column(name = "hours")
+    private String hours;
+    @Column(name = "number_of_groups")
+    private String numberOfGroups;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "subject")
+    private Set<WorkerInSubject> workerInSubjects = new HashSet<>();
 
     @Override
     public Long getId() {
@@ -51,11 +57,27 @@ public class Subject extends BaseEntity {
         this.type = type;
     }
 
-    public Lecture getLecture() {
-        return lecture;
+    public String getNumberOfGroups() {
+        return numberOfGroups;
     }
 
-    public void setLecture(Lecture lecture) {
-        this.lecture = lecture;
+    public void setNumberOfGroups(String numberOfGroups) {
+        this.numberOfGroups = numberOfGroups;
+    }
+
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public Set<WorkerInSubject> getWorkerInSubjects() {
+        return workerInSubjects;
+    }
+
+    public void setWorkerInSubjects(Set<WorkerInSubject> workerInSubjects) {
+        this.workerInSubjects = workerInSubjects;
     }
 }

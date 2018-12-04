@@ -24,8 +24,8 @@ public class Worker extends BaseEntity {
     private String name;
     @Column(name = "surname")
     private String surname;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "worker")
-    private Set<Lecture> lectures = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "worker")
+    private Set<WorkerInSubject> workerInSubject = new HashSet<>();
 
     @Override
     public Long getId() {
@@ -53,11 +53,11 @@ public class Worker extends BaseEntity {
         this.surname = surname;
     }
 
-    public Set<Lecture> getLectures() {
-        return lectures;
+    public Set<WorkerInSubject> getWorkerInSubject() {
+        return workerInSubject;
     }
 
-    public void setLectures(Set<Lecture> lectures) {
-        this.lectures = lectures;
+    public void setWorkerInSubject(Set<WorkerInSubject> workerInSubject) {
+        this.workerInSubject = workerInSubject;
     }
 }

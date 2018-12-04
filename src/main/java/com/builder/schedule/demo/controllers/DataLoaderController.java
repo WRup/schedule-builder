@@ -3,8 +3,7 @@ package com.builder.schedule.demo.controllers;
 
 import com.builder.schedule.demo.excel.DataLoaderService;
 import com.builder.schedule.demo.excel.ExcelPOIHelper;
-import com.builder.schedule.demo.model.Year;
-import com.builder.schedule.demo.services.YearService;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 
 @Controller
@@ -35,7 +33,7 @@ public class DataLoaderController {
     }
 
     @PostMapping("/uploadExcelFile")
-    public String uploadFile(Model model, MultipartFile file) throws IOException {
+    public String uploadFile(Model model, MultipartFile file) throws IOException, InvalidFormatException {
         InputStream in = file.getInputStream();
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
@@ -50,7 +48,7 @@ public class DataLoaderController {
         } catch (Exception e) {
             System.out.print("File cannot be loaded.");
         }
-        dataLoaderService.load(fileLocation);
+        dataLoaderService.dataLoad(fileLocation);
         model.addAttribute("message", "File: " + file.getOriginalFilename() + " has been uploaded successfully!");
         return "excel";
     }

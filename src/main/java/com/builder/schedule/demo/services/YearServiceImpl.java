@@ -18,7 +18,7 @@ public class YearServiceImpl implements YearService {
 
     @Override
     public Set<Year> findAll() {
-        return null;
+        return yearRepository.findAll();
     }
 
     @Override

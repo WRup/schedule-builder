@@ -1,24 +1,13 @@
 package com.builder.schedule.demo.excel;
 
-import org.springframework.core.io.Resource;
-import org.springframework.web.multipart.MultipartFile;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
-import java.nio.file.Path;
-import java.util.stream.Stream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public interface DataLoaderService {
 
-    void init();
-
-    void store(MultipartFile file);
-
-    Stream<Path> loadAll();
-
-    Path load(String filename);
-
-    Resource loadAsResource(String filename);
-
-    void deleteAll();
+    void dataLoad(String filepath) throws FileNotFoundException, IOException, InvalidFormatException;
 
 }

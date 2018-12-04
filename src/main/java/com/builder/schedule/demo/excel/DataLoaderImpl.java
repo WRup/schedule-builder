@@ -1,70 +1,92 @@
 package com.builder.schedule.demo.excel;
 
+import com.builder.schedule.demo.model.Group;
+import com.builder.schedule.demo.model.Lecture;
+import com.builder.schedule.demo.model.Subject;
+import com.builder.schedule.demo.model.Worker;
+import com.builder.schedule.demo.model.WorkerInSubject;
+import com.builder.schedule.demo.model.Year;
+import com.builder.schedule.demo.model.repository.GroupRepository;
+import com.builder.schedule.demo.model.repository.LectureRepository;
+import com.builder.schedule.demo.model.repository.SubjectRepository;
+import com.builder.schedule.demo.model.repository.WorkerInSubjectRepository;
+import com.builder.schedule.demo.model.repository.WorkerRepository;
+import com.builder.schedule.demo.model.repository.YearRepository;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 public class DataLoaderImpl implements DataLoaderService {
 
-    @Override
-    public void init() {
-        //todo
+    private final GroupRepository groupRepository;
+    private final YearRepository yearRepository;
+    private final WorkerRepository workerRepository;
+    private final SubjectRepository subjectRepository;
+    private final LectureRepository lectureRepository;
+    private final WorkerInSubjectRepository workerInSubjectRepository;
+
+    public DataLoaderImpl(GroupRepository groupRepository, YearRepository yearRepository, WorkerRepository workerRepository, SubjectRepository subjectRepository, LectureRepository lectureRepository, WorkerInSubjectRepository workerInSubjectRepository) {
+        this.groupRepository = groupRepository;
+        this.yearRepository = yearRepository;
+        this.workerRepository = workerRepository;
+        this.subjectRepository = subjectRepository;
+        this.lectureRepository = lectureRepository;
+        this.workerInSubjectRepository = workerInSubjectRepository;
     }
 
     @Override
-    public void store(MultipartFile file) {
-        //todo
-    }
-
-    @Override
-    public Stream<Path> loadAll() {
-        //todo
-        return null;
-    }
-
-    @Override
-    public Path load(String filename) {
+    public void dataLoad(String filepath) throws IOException, InvalidFormatException {
         ExcelPOIHelper excelPOIHelper = new ExcelPOIHelper();
-        List<ArrayList> listList = new ArrayList<>();
-        try (OPCPackage pkg = OPCPackage.open(new File(filename))) {
+        List<ArrayList> listList;
+        try (OPCPackage pkg = OPCPackage.open(new File(filepath))) {
 
 
             XSSFWorkbook workbook = new XSSFWorkbook(pkg);
             XSSFSheet sheet = workbook.getSheetAt(0);
             listList = excelPOIHelper.readExcel(sheet);
 
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidFormatException e) {
-            e.printStackTrace();
         }
 
-        return null;
-    }
-
-    @Override
-    public Resource loadAsResource(String filename) {
-        //todo
-        return null;
-    }
-
-    @Override
-    public void deleteAll() {
-        //todo
+        for (int i = 0; i < listList.size(); i++) {
+            switch (i) {
+                case 0:
+                    for (Object obj : listList.get(0)) {
+                        subjectRepository.save((Subject) obj);
+                    }
+                    break;
+                case 1:
+                    for (Object obj : listList.get(1)) {
+                        workerRepository.save((Worker) obj);
+                    }
+                    break;
+                case 2:
+                    for (Object obj : listList.get(2)) {
+                        yearRepository.save((Year) obj);
+                    }
+                    break;
+                case 3:
+                    for (Object obj : listList.get(3)) {
+                        groupRepository.save((Group) obj);
+                    }
+                    break;
+                case 4:
+                    for (Object obj : listList.get(4)) {
+                        workerInSubjectRepository.save((WorkerInSubject) obj);
+                    }
+                    break;
+                case 5:
+                    for (Object obj : listList.get(5)) {
+                        lectureRepository.save((Lecture) obj);
+                    }
+            }
+        }
     }
 }

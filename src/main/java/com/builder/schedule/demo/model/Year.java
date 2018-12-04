@@ -24,8 +24,6 @@ public class Year extends BaseEntity {
     private String name;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "year")
     private Set<Group> groups = new HashSet<>();
-    @Column(name = "number_of_groups")
-    private String numberOfGroups;
     @Column(name = "number_of_students")
     private String students;
     @Column(name = "term")
@@ -55,14 +53,6 @@ public class Year extends BaseEntity {
 
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
-    }
-
-    public String getNumberOfGroups() {
-        return numberOfGroups;
-    }
-
-    public void setNumberOfGroups(String numberOfGroups) {
-        this.numberOfGroups = numberOfGroups;
     }
 
     public String getStudents() {
