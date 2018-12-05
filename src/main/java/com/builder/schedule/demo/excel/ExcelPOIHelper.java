@@ -30,11 +30,18 @@ public class ExcelPOIHelper {
         Worker worker;
         Year year;
         WorkerInSubject workerInSubject;
-        subject = new Subject();
         year = new Year();
+        subject = new Subject();
+        boolean checker = false;
         for (Row row : sheet) {
             worker = new Worker();
             workerInSubject = new WorkerInSubject();
+            if(row.cellIterator().next().getStringCellValue().equals("")) {
+                System.out.println("Wbił tu:?");
+                checker = true;
+                subject = new Subject();
+                continue;
+            }
             if(row.getRowNum() == 0) {
                 Iterator<Cell> cellIterator = row.cellIterator();
                 while (cellIterator.hasNext()) {
@@ -54,7 +61,8 @@ public class ExcelPOIHelper {
                 }
             }
 
-            if(row.getRowNum() == 1) {
+            if(row.getRowNum() == 1 || checker) {
+                checker = false;
                 Iterator<Cell> cellIterator = row.cellIterator();
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
@@ -75,8 +83,9 @@ public class ExcelPOIHelper {
                             break;
                     }
                 }
+                continue;
             }
-            if(row.getRowNum() >= 2) {
+            if(row.getRowNum() >= 2 && !checker) {
                 Iterator<Cell> cellIterator = row.cellIterator();
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
@@ -89,8 +98,8 @@ public class ExcelPOIHelper {
                             workers.add(worker);
                             break;
                         case 2:
-                            workerInSubject.setSubject(subject);
                             workerInSubject.setWorker(worker);
+                            workerInSubject.setSubject(subject);
                             workerInSubject.setHours(cell.getStringCellValue());
                             workerInSubjects.add(workerInSubject);
                             break;

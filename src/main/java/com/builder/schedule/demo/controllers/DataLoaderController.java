@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -29,7 +27,7 @@ public class DataLoaderController {
 
     @GetMapping("")
     public String index() {
-        return "excel";
+        return "loader/excel";
     }
 
     @PostMapping("/uploadExcelFile")
@@ -50,21 +48,6 @@ public class DataLoaderController {
         }
         dataLoaderService.dataLoad(fileLocation);
         model.addAttribute("message", "File: " + file.getOriginalFilename() + " has been uploaded successfully!");
-        return "excel";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/readPOI")
-    public String readPOI(Model model) {
-
-        if(fileLocation != null) {
-            if(fileLocation.endsWith(".xlsx") || fileLocation.endsWith(".xls")) {
-                model.addAttribute("data", fileLocation);
-            } else {
-                model.addAttribute("message", "Not a valid excel file!");
-            }
-        } else {
-            model.addAttribute("message", "File missing! Please upload an excel file.");
-        }
-        return "excel";
+        return "loader/excel";
     }
 }

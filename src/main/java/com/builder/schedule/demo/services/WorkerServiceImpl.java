@@ -40,4 +40,8 @@ public class WorkerServiceImpl implements WorkerService {
     public void deleteById(Long aLong) {
 
     }
+
+    public Worker findByNameAndSurname(String name, String surname) {
+        return workerRepository.findByNameAndSurname(name, surname);
+    }
 }
