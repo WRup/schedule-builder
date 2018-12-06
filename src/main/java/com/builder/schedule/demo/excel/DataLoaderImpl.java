@@ -44,7 +44,8 @@ public class DataLoaderImpl implements DataLoaderService {
     }
 
     @Override
-    public void dataLoad(String filepath) throws IOException, InvalidFormatException {
+    public String dataLoad(String filepath) throws InvalidFormatException {
+        String parser = "File has not been parsed.";
         ExcelPOIHelper excelPOIHelper = new ExcelPOIHelper();
         CsvPOIHelper csvPOIHelper = new CsvPOIHelper();
         List<ArrayList> listList = new ArrayList<>();
@@ -59,10 +60,10 @@ public class DataLoaderImpl implements DataLoaderService {
                 } else if(filepath.endsWith(".csv")) {
                     listList = csvPOIHelper.readCsv(filepath);
                 } else {
-                    System.out.println("Wrong file format");
+                    return ("Wrong file format");
                 }
             } else {
-                System.out.println("File missing! Please upload an excel or csv file.");
+                return ("File missing! Please upload an excel or csv file.");
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -70,9 +71,8 @@ public class DataLoaderImpl implements DataLoaderService {
             e.printStackTrace();
         }
 
-        if(!listList.isEmpty())
-
-        {
+        if(!listList.isEmpty()) {
+            parser = "File has been parsed successfully!";
             for (int i = 0; i < listList.size(); i++) {
                 switch (i) {
                     case 0:
@@ -113,5 +113,6 @@ public class DataLoaderImpl implements DataLoaderService {
                 }
             }
         }
+        return ("File has been uploaded successfully!\n" + parser);
     }
 }

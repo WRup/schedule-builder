@@ -8,6 +8,6 @@ import java.io.IOException;
 
 public interface DataLoaderService {
 
-    void dataLoad(String filepath) throws FileNotFoundException, IOException, InvalidFormatException;
+    String dataLoad(String filepath) throws FileNotFoundException, IOException, InvalidFormatException;
 
 }

@@ -37,7 +37,6 @@ public class ExcelPOIHelper {
             worker = new Worker();
             workerInSubject = new WorkerInSubject();
             if(row.cellIterator().next().getStringCellValue().equals("")) {
-                System.out.println("Wbił tu:?");
                 checker = true;
                 subject = new Subject();
                 continue;
@@ -91,13 +90,16 @@ public class ExcelPOIHelper {
                     Cell cell = cellIterator.next();
                     switch (cell.getColumnIndex()) {
                         case 0:
-                            worker.setName(cell.getStringCellValue());
+                            worker.setTitle(cell.getStringCellValue());
                             break;
                         case 1:
+                            worker.setName(cell.getStringCellValue());
+                            break;
+                        case 2:
                             worker.setSurname(cell.getStringCellValue());
                             workers.add(worker);
                             break;
-                        case 2:
+                        case 3:
                             workerInSubject.setWorker(worker);
                             workerInSubject.setSubject(subject);
                             workerInSubject.setHours(cell.getStringCellValue());

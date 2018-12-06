@@ -22,12 +22,12 @@ public class CalendarController {
         this.subjectService = subjectService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/calendar")
+    @RequestMapping(method = RequestMethod.GET, value = "/scheduler")
     public String index(Model model) {
         model.addAttribute("lectures", lectureService.findAll());
         model.addAttribute("years", yearService.findAll());
         //model.addAttribute("subjects", subjectService.findAll());
-        return "calendar/calendar";
+        return "calendar/scheduler";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getLectures")

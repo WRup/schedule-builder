@@ -20,6 +20,8 @@ public class Worker extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
+    private String title;
     @Column(name = "name")
     private String name;
     @Column(name = "surname")
@@ -35,6 +37,14 @@ public class Worker extends BaseEntity {
     @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getName() {

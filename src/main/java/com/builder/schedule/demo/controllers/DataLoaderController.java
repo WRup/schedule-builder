@@ -31,7 +31,7 @@ public class DataLoaderController {
     }
 
     @PostMapping("/uploadExcelFile")
-    public String uploadFile(Model model, MultipartFile file) throws IOException, InvalidFormatException {
+    public String uploadFile(Model model, MultipartFile file) throws IOException, InvalidFormatException, InterruptedException {
         InputStream in = file.getInputStream();
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
@@ -46,8 +46,9 @@ public class DataLoaderController {
         } catch (Exception e) {
             System.out.print("File cannot be loaded.");
         }
-        dataLoaderService.dataLoad(fileLocation);
-        model.addAttribute("message", "File: " + file.getOriginalFilename() + " has been uploaded successfully!");
+        String message = dataLoaderService.dataLoad(fileLocation);
+        System.out.println(message);
+        model.addAttribute("message", message);
         return "loader/excel";
     }
 }

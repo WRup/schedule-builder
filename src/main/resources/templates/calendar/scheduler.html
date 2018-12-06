@@ -17,8 +17,9 @@
 
                 // store data so the calendar knows to render an event upon drop
                 $(this).data('event', {
-                    title: $.trim($(this).text()), // use the element's text as the event title
-                    stick: true,// maintain when user navigates (see docs on the renderEvent method)
+                    //title: $.trim($(this).text()), // use the element's text as the event title
+                    title: $(this).html(),
+                    stick: true// maintain when user navigates (see docs on the renderEvent method)
                 });
 
                 // make the event draggable using jQuery UI
@@ -33,7 +34,7 @@
 
             $('#calendar').fullCalendar({
                 defaultView: 'agendaDay',
-                defaultDate: '2018-04-07',
+                defaultDate: '2018-12-06',
                 dragRevertDuration: 0,
                 droppable: true,
                 editable: true,
@@ -112,7 +113,7 @@
                     console.log('eventReceive', event);
                 },
 
-                eventDrop: function (event) { // called when an event (already on the calendar) is moved
+                eventDrop: function (event, element) { // called when an event (already on the calendar) is moved
                     console.log('eventDrop', event);
                 },
 
@@ -120,7 +121,7 @@
 
                     if (isEventOverDiv(jsEvent.clientX, jsEvent.clientY)) {
                         $('#calendar').fullCalendar('removeEvents', event._id);
-                        var el = $("<div class='fc-event'>").appendTo('#external-events-listing').text(event.title);
+                        var el = $("<div class='fc-event'>").appendTo('#external-events-listing').html(event.title);
                         el.draggable({
                             zIndex: 999,
                             revert: true,
@@ -238,6 +239,7 @@
             <form th:each="lecture:${lectures}">
                 <div th:utext="${lecture.workerInSubject.subject.name} + '<br/>'
             + 'Type: ' + ${lecture.workerInSubject.subject.type} + '<br/>'
+            + ${lecture.workerInSubject.worker.title} + '<br/>'
             + ${lecture.workerInSubject.worker.name} + '<br/>'
             + ${lecture.workerInSubject.worker.surname}" class='fc-event'>My Event 1
                 </div>
