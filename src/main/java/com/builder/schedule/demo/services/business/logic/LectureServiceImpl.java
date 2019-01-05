@@ -1,10 +1,13 @@
-package com.builder.schedule.demo.services;
+package com.builder.schedule.demo.services.business.logic;
 
 
 import com.builder.schedule.demo.model.Lecture;
 import com.builder.schedule.demo.model.repository.LectureRepository;
+import com.builder.schedule.demo.services.assembler.LectureAssembler;
+import com.builder.schedule.demo.services.dto.LectureDto;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Set;
 
 @Service
@@ -17,27 +20,14 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
+    @Transactional
+    public void save(LectureDto dto) {
+        lectureRepository.save(LectureAssembler.toEntity(dto));
+    }
+
+    @Override
+    @Transactional
     public Set<Lecture> findAll() {
         return lectureRepository.findAll();
-    }
-
-    @Override
-    public Lecture findById(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public Lecture save(Lecture object) {
-        return null;
-    }
-
-    @Override
-    public void delete(Lecture object) {
-
-    }
-
-    @Override
-    public void deleteById(Long aLong) {
-
     }
 }

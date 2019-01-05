@@ -1,4 +1,4 @@
-package com.builder.schedule.demo.services.map;
+package com.builder.schedule.demo.services.business.map;
 
 
 import com.builder.schedule.demo.model.BaseEntity;

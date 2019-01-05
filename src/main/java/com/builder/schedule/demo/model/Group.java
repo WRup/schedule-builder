@@ -31,6 +31,10 @@ public class Group extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "group")
     private Set<Lecture> lectures = new HashSet<>();
 
+    public Group() {
+
+    }
+
     public Group(String name, String type, Year year) {
         this.name = name;
         this.type = type;

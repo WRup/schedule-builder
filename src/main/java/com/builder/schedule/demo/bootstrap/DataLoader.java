@@ -1,8 +1,8 @@
 package com.builder.schedule.demo.bootstrap;
 
-import com.builder.schedule.demo.services.SubjectService;
-import com.builder.schedule.demo.services.WorkerService;
-import com.builder.schedule.demo.services.YearService;
+import com.builder.schedule.demo.services.business.logic.SubjectService;
+import com.builder.schedule.demo.services.business.logic.WorkerService;
+import com.builder.schedule.demo.services.business.logic.YearService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.builder.schedule.demo.services;
+package com.builder.schedule.demo.services.business.logic;
 
 import java.util.Set;
 

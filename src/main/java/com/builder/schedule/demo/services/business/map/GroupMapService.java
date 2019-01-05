@@ -1,7 +1,7 @@
-package com.builder.schedule.demo.services.map;
+package com.builder.schedule.demo.services.business.map;
 
 import com.builder.schedule.demo.model.Group;
-import com.builder.schedule.demo.services.GroupService;
+import com.builder.schedule.demo.services.business.logic.GroupService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
