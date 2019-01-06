@@ -23,7 +23,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Subject findById(Long aLong) {
-        return null;
+        return subjectRepository.findById(aLong).orElse(null);
     }
 
     @Override

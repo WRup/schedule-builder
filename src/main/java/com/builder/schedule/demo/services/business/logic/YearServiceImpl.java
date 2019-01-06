@@ -23,7 +23,7 @@ public class YearServiceImpl implements YearService {
 
     @Override
     public Year findById(Long aLong) {
-        return null;
+        return yearRepository.findById(aLong).orElse(null);
     }
 
     @Override

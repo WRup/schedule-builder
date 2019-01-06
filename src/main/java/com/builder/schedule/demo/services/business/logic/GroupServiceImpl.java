@@ -23,7 +23,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group findById(Long aLong) {
-        return null;
+        return groupRepository.findById(aLong).orElse(null);
     }
 
     @Override

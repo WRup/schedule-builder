@@ -23,7 +23,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker findById(Long aLong) {
-        return null;
+        return workerRepository.findById(aLong).orElse(null);
     }
 
     @Override

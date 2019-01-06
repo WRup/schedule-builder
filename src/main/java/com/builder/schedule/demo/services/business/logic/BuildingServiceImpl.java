@@ -25,7 +25,7 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public Building findById(Long aLong) {
-        return null;
+        return buildingRepository.findById(aLong).orElse(null);
     }
 
     @Override

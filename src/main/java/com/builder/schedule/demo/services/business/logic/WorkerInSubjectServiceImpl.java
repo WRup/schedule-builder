@@ -23,7 +23,7 @@ public class WorkerInSubjectServiceImpl implements WorkerInSubjectService {
 
     @Override
     public WorkerInSubject findById(Long aLong) {
-        return null;
+        return workerInSubjectRepository.findById(aLong).orElse(null);
     }
 
     @Override

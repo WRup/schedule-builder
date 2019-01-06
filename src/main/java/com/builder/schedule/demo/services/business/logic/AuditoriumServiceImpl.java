@@ -23,7 +23,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     @Override
     public Auditorium findById(Long aLong) {
-        return null;
+        return auditoriumRepository.findById(aLong).orElse(null);
     }
 
     @Override
