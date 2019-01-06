@@ -4,7 +4,7 @@ import com.builder.schedule.demo.model.Group;
 import com.builder.schedule.demo.model.repository.GroupRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 
 @Service
@@ -17,8 +17,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Set<Group> findAll() {
-        return null;
+    public List<Group> findAll() {
+        return groupRepository.findAll();
     }
 
     @Override
@@ -28,16 +28,16 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group save(Group object) {
-        return null;
+        return groupRepository.save(object);
     }
 
     @Override
     public void delete(Group object) {
-
+        groupRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        groupRepository.deleteById(aLong);
     }
 }

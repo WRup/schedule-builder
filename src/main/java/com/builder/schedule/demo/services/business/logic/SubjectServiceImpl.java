@@ -5,7 +5,7 @@ import com.builder.schedule.demo.model.Subject;
 import com.builder.schedule.demo.model.repository.SubjectRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -17,7 +17,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public Set<Subject> findAll() {
+    public List<Subject> findAll() {
         return subjectRepository.findAll();
     }
 
@@ -28,16 +28,16 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Subject save(Subject object) {
-        return null;
+        return subjectRepository.save(object);
     }
 
     @Override
     public void delete(Subject object) {
-
+        subjectRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        subjectRepository.deleteById(aLong);
     }
 }

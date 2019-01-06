@@ -4,7 +4,7 @@ import com.builder.schedule.demo.model.Auditorium;
 import com.builder.schedule.demo.model.repository.AuditoriumRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 
 @Service
@@ -17,8 +17,8 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     }
 
     @Override
-    public Set<Auditorium> findAll() {
-        return null;
+    public List<Auditorium> findAll() {
+        return auditoriumRepository.findAll();
     }
 
     @Override
@@ -28,8 +28,7 @@ public class AuditoriumServiceImpl implements AuditoriumService {
 
     @Override
     public Auditorium save(Auditorium object) {
-        auditoriumRepository.save(object);
-        return object;
+        return auditoriumRepository.save(object);
     }
 
     @Override

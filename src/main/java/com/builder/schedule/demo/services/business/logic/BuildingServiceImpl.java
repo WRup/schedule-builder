@@ -5,7 +5,7 @@ import com.builder.schedule.demo.model.repository.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 
@@ -18,10 +18,9 @@ public class BuildingServiceImpl implements BuildingService {
         this.buildingRepository = buildingRepository;
     }
 
-
     @Override
-    public Set<Building> findAll() {
-        return null;
+    public List<Building> findAll() {
+        return buildingRepository.findAll();
     }
 
     @Override
@@ -31,16 +30,16 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public Building save(Building object) {
-        return null;
+        return buildingRepository.save(object);
     }
 
     @Override
     public void delete(Building object) {
-
+        buildingRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        buildingRepository.deleteById(aLong);
     }
 }

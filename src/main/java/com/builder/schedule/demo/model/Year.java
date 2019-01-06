@@ -1,6 +1,8 @@
 package com.builder.schedule.demo.model;
 
 
+import lombok.Data;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +17,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "STUDIES_YEAR")
-public class Year extends BaseEntity {
+@Data
+public class Year {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,46 +31,4 @@ public class Year extends BaseEntity {
     private String students;
     @Column(name = "term")
     private String term;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
-    }
-
-    public String getStudents() {
-        return students;
-    }
-
-    public void setStudents(String students) {
-        this.students = students;
-    }
-
-    public String getTerm() {
-        return term;
-    }
-
-    public void setTerm(String term) {
-        this.term = term;
-    }
 }

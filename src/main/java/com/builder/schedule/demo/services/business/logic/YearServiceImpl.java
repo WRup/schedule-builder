@@ -5,7 +5,7 @@ import com.builder.schedule.demo.model.Year;
 import com.builder.schedule.demo.model.repository.YearRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class YearServiceImpl implements YearService {
@@ -17,7 +17,7 @@ public class YearServiceImpl implements YearService {
     }
 
     @Override
-    public Set<Year> findAll() {
+    public List<Year> findAll() {
         return yearRepository.findAll();
     }
 
@@ -28,17 +28,16 @@ public class YearServiceImpl implements YearService {
 
     @Override
     public Year save(Year object) {
-        yearRepository.save(object);
-        return object;
+        return yearRepository.save(object);
     }
 
     @Override
     public void delete(Year object) {
-
+        yearRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        yearRepository.deleteById(aLong);
     }
 }

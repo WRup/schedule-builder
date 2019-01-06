@@ -89,11 +89,11 @@
                 },
                 eventReceive: function (event) { // called when a proper external event is dropped
                     $.ajax({
-                        url: '/helloworld',
+                        url: '/postLecture',
                         type: 'POST',
                         data: {
                             json: JSON.stringify({
-                                name: "Bob"
+                                name: "test"
                             })
                         },
                         dataType: 'json'

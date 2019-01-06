@@ -2,7 +2,6 @@ package com.builder.schedule.demo.controllers;
 
 
 import com.builder.schedule.demo.excel.DataLoaderService;
-import com.builder.schedule.demo.excel.ExcelPOIHelper;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +19,6 @@ import java.io.InputStream;
 @Controller
 public class DataLoaderController {
 
-    private String fileLocation;
-    private ExcelPOIHelper excelPOIHelper;
     @Autowired
     private DataLoaderService dataLoaderService;
 
@@ -31,14 +28,13 @@ public class DataLoaderController {
     }
 
     @PostMapping("/uploadExcelFile")
-    public String uploadFile(Model model, MultipartFile file) throws IOException, InvalidFormatException, InterruptedException {
+    public String uploadFile(Model model, MultipartFile file) throws IOException, InvalidFormatException {
         InputStream in = file.getInputStream();
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
-        excelPOIHelper = new ExcelPOIHelper();
-        fileLocation = path.substring(0, path.length() - 1) + file.getOriginalFilename();
+        String fileLocation = path.substring(0, path.length() - 1) + file.getOriginalFilename();
         try (FileOutputStream f = new FileOutputStream(fileLocation)) {
-            int ch = 0;
+            int ch;
             while ((ch = in.read()) != -1) {
                 f.write(ch);
             }

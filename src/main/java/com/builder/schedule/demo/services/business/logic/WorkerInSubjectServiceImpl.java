@@ -4,7 +4,7 @@ import com.builder.schedule.demo.model.WorkerInSubject;
 import com.builder.schedule.demo.model.repository.WorkerInSubjectRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class WorkerInSubjectServiceImpl implements WorkerInSubjectService {
@@ -17,7 +17,7 @@ public class WorkerInSubjectServiceImpl implements WorkerInSubjectService {
 
 
     @Override
-    public Set<WorkerInSubject> findAll() {
+    public List<WorkerInSubject> findAll() {
         return workerInSubjectRepository.findAll();
     }
 
@@ -28,17 +28,16 @@ public class WorkerInSubjectServiceImpl implements WorkerInSubjectService {
 
     @Override
     public WorkerInSubject save(WorkerInSubject object) {
-        workerInSubjectRepository.save(object);
-        return object;
+        return workerInSubjectRepository.save(object);
     }
 
     @Override
     public void delete(WorkerInSubject object) {
-
+        workerInSubjectRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        workerInSubjectRepository.deleteById(aLong);
     }
 }

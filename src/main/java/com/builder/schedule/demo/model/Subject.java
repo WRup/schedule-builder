@@ -1,6 +1,8 @@
 package com.builder.schedule.demo.model;
 
 
+import lombok.Data;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +17,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "SUBJECT")
-public class Subject extends BaseEntity {
+@Data
+public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,54 +33,4 @@ public class Subject extends BaseEntity {
     private String numberOfGroups;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "subject")
     private Set<WorkerInSubject> workerInSubjects = new HashSet<>();
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getNumberOfGroups() {
-        return numberOfGroups;
-    }
-
-    public void setNumberOfGroups(String numberOfGroups) {
-        this.numberOfGroups = numberOfGroups;
-    }
-
-    public String getHours() {
-        return hours;
-    }
-
-    public void setHours(String hours) {
-        this.hours = hours;
-    }
-
-    public Set<WorkerInSubject> getWorkerInSubjects() {
-        return workerInSubjects;
-    }
-
-    public void setWorkerInSubjects(Set<WorkerInSubject> workerInSubjects) {
-        this.workerInSubjects = workerInSubjects;
-    }
 }

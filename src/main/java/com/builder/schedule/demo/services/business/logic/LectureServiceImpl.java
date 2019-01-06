@@ -8,7 +8,7 @@ import com.builder.schedule.demo.services.dto.LectureDto;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class LectureServiceImpl implements LectureService {
@@ -27,7 +27,7 @@ public class LectureServiceImpl implements LectureService {
 
     @Override
     @Transactional
-    public Set<Lecture> findAll() {
+    public List<Lecture> findAll() {
         return lectureRepository.findAll();
     }
 }

@@ -5,7 +5,7 @@ import com.builder.schedule.demo.model.Worker;
 import com.builder.schedule.demo.model.repository.WorkerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
@@ -17,8 +17,8 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public Set<Worker> findAll() {
-        return null;
+    public List<Worker> findAll() {
+        return workerRepository.findAll();
     }
 
     @Override
@@ -28,17 +28,17 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker save(Worker object) {
-        return null;
+        return workerRepository.save(object);
     }
 
     @Override
     public void delete(Worker object) {
-
+        workerRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        workerRepository.deleteById(aLong);
     }
 
     public Worker findByNameAndSurname(String name, String surname) {

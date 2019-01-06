@@ -1,6 +1,7 @@
 package com.builder.schedule.demo.model;
 
 import com.builder.schedule.demo.enumexample.Days;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "LECTURE")
-public class Lecture extends BaseEntity {
+@Data
+public class Lecture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,55 +48,5 @@ public class Lecture extends BaseEntity {
     }
 
     public Lecture() {
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Days getDays() {
-        return days;
-    }
-
-    public void setDays(Days days) {
-        this.days = days;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    public Auditorium getAuditorium() {
-        return auditorium;
-    }
-
-    public void setAuditorium(Auditorium auditorium) {
-        this.auditorium = auditorium;
-    }
-
-    public WorkerInSubject getWorkerInSubject() {
-        return workerInSubject;
-    }
-
-    public void setWorkerInSubject(WorkerInSubject workerInSubject) {
-        this.workerInSubject = workerInSubject;
     }
 }
