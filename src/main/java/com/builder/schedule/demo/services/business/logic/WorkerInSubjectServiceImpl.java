@@ -1,5 +1,7 @@
 package com.builder.schedule.demo.services.business.logic;
 
+import com.builder.schedule.demo.model.Subject;
+import com.builder.schedule.demo.model.Worker;
 import com.builder.schedule.demo.model.WorkerInSubject;
 import com.builder.schedule.demo.model.repository.WorkerInSubjectRepository;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,10 @@ public class WorkerInSubjectServiceImpl implements WorkerInSubjectService {
     @Override
     public void deleteById(Long aLong) {
         workerInSubjectRepository.deleteById(aLong);
+    }
+
+    @Override
+    public WorkerInSubject findBySubjectAndWorker(Subject subject, Worker worker) {
+        return workerInSubjectRepository.findBySubjectAndWorker(subject, worker);
     }
 }

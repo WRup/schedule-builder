@@ -40,4 +40,9 @@ public class SubjectServiceImpl implements SubjectService {
     public void deleteById(Long aLong) {
         subjectRepository.deleteById(aLong);
     }
+
+    @Override
+    public Subject findByNameAndType(String name, String type) {
+        return subjectRepository.findByNameAndType(name, type);
+    }
 }

@@ -3,7 +3,6 @@ package com.builder.schedule.demo.controllers;
 
 import com.builder.schedule.demo.common.SuccessMessage;
 import com.builder.schedule.demo.services.business.logic.LectureService;
-import com.builder.schedule.demo.services.business.logic.SubjectService;
 import com.builder.schedule.demo.services.business.logic.YearService;
 import com.builder.schedule.demo.services.dto.LectureDto;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CalendarController {
@@ -19,7 +19,7 @@ public class CalendarController {
     private final LectureService lectureService;
     private final YearService yearService;
 
-    public CalendarController(LectureService lectureService, YearService yearService, SubjectService subjectService) {
+    public CalendarController(LectureService lectureService, YearService yearService) {
         this.lectureService = lectureService;
         this.yearService = yearService;
     }
@@ -31,6 +31,7 @@ public class CalendarController {
         return "calendar/scheduler";
     }
 
+    @ResponseBody
     @RequestMapping(method = RequestMethod.POST, value = "/postLecture")
     public ResponseEntity<SuccessMessage> postLecture(@RequestBody LectureDto dto) {
         lectureService.save(dto);

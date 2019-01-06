@@ -10,4 +10,6 @@ public interface LectureService {
     void save(LectureDto dto);
 
     List<Lecture> findAll();
+
+    Lecture findById(Long aLong);
 }

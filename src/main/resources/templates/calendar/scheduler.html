@@ -63,10 +63,12 @@
                 allDaySlot: false,
 
                 resources: [
-                    {id: 'a', title: 'Group 1'},
-                    {id: 'b', title: 'Group 2', eventColor: 'green'},
-                    {id: 'c', title: 'Group 3', eventColor: 'orange'},
-                    {id: 'd', title: 'Group 4', eventColor: 'red'}
+                    {id: 'a', title: 'GR 1', eventColor: 'green'},
+                    {id: 'b', title: 'GR 2', eventColor: 'green'},
+                    {id: 'c', title: 'GR 3', eventColor: 'orange'},
+                    {id: 'd', title: 'GR 4', eventColor: 'orange'},
+                    {id: 'e', title: 'GR 5', eventColor: 'red'},
+                    {id: 'f', title: 'GR 6', eventColor: 'red'}
                 ],
                 /*events: [
                     {id: '1', resourceId: 'a', start: '2018-04-06', end: '2018-04-08', title: 'event 1'},
@@ -91,14 +93,24 @@
                     $.ajax({
                         url: '/postLecture',
                         type: 'POST',
+                        dataType: "application/json",
+                        contentType: "text/plain",
                         data: {
                             json: JSON.stringify({
-                                name: "test"
+                                id: 1,
+                                name: event.title.split("<br>")[0],
+                                type: event.title.split("<br>")[1],
+                                workerName: event.title.split("<br>")[3],
+                                workerSurname: event.title.split("<br>")[4],
+                                startTime: event.start._d,
+                                dayOfWeek: "test",
+                                groupName: event.resourceId,
+                                auditorium: "test"
                             })
-                        },
-                        dataType: 'json'
+                        }
                     });
                     console.log('eventReceive', event);
+                    console.log(event.title.split("<br>")[0])
                 },
 
                 eventDrop: function (event, element) { // called when an event (already on the calendar) is moved
@@ -226,7 +238,7 @@
          + 'Students: ' + ${year.students}">Draggable Events</h4>
             <form th:each="lecture:${lectures}">
                 <div th:utext="${lecture.workerInSubject.subject.name} + '<br/>'
-            + 'Type: ' + ${lecture.workerInSubject.subject.type} + '<br/>'
+            + ${lecture.workerInSubject.subject.type} + '<br/>'
             + ${lecture.workerInSubject.worker.title} + '<br/>'
             + ${lecture.workerInSubject.worker.name} + '<br/>'
             + ${lecture.workerInSubject.worker.surname}" class='fc-event'>My Event 1
