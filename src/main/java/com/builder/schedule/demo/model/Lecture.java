@@ -15,8 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
@@ -27,9 +25,10 @@ public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Temporal(TemporalType.DATE)
     @Column(name = "start_time")
-    private Date date;
+    private Date startDate;
+    @Column(name = "end_date")
+    private Date endDate;
     @Enumerated(EnumType.STRING)
     @Column(name = "day_of_week")
     private Days days;

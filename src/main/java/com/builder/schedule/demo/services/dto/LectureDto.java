@@ -2,20 +2,24 @@ package com.builder.schedule.demo.services.dto;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class LectureDto {
 
     private Long id;
 
-    private String name;
-    private String type;
+    private String subjectName;
+    private String subjectType;
 
     private String workerName;
     private String workerSurname;
 
-    private String startTime;
+    private Date startDate;
+    private Date endDate;
+
     private String dayOfWeek;
 
-    private String groupName;
+    private Long groupId;
     private String auditoruim;
 }

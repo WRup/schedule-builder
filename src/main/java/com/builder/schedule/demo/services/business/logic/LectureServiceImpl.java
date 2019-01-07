@@ -1,6 +1,7 @@
 package com.builder.schedule.demo.services.business.logic;
 
 
+import com.builder.schedule.demo.model.Group;
 import com.builder.schedule.demo.model.Lecture;
 import com.builder.schedule.demo.model.Subject;
 import com.builder.schedule.demo.model.Worker;
@@ -20,22 +21,25 @@ public class LectureServiceImpl implements LectureService {
     private final WorkerService workerService;
     private final SubjectService subjectService;
     private final WorkerInSubjectService workerInSubjectService;
+    private final GroupService groupService;
     //reposy pozostalych potrzebnych obiektow
 
-    public LectureServiceImpl(LectureRepository lectureRepository, WorkerService workerService, SubjectService subjectService, WorkerInSubjectService workerInSubjectService) {
+    public LectureServiceImpl(LectureRepository lectureRepository, WorkerService workerService, SubjectService subjectService, WorkerInSubjectService workerInSubjectService, GroupService groupService) {
         this.lectureRepository = lectureRepository;
         this.workerService = workerService;
         this.subjectService = subjectService;
         this.workerInSubjectService = workerInSubjectService;
+        this.groupService = groupService;
     }
 
     @Override
     @Transactional
     public void save(LectureDto dto) {
+        Group group = groupService.findById(dto.getGroupId());
         Worker worker = workerService.findByNameAndSurname(dto.getWorkerName(), dto.getWorkerSurname());
-        Subject subject = subjectService.findByNameAndType(dto.getName(), dto.getType());
+        Subject subject = subjectService.findByNameAndType(dto.getSubjectName(), dto.getSubjectType());
         WorkerInSubject workerInSubject = workerInSubjectService.findBySubjectAndWorker(subject, worker);
-        lectureRepository.save(LectureAssembler.toEntity(dto, workerInSubject));
+        lectureRepository.save(LectureAssembler.toEntity(dto, workerInSubject, group));
     }
 
     @Override

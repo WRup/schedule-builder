@@ -11,6 +11,29 @@
     <script src='js/fullcalendar.min.js'></script>
     <script src='js/scheduler.min.js'></script>
     <script>
+        function updateElement(event) {
+            var lectureDto = {
+                id: 1,
+                subjectName: event.title.split("<br>")[0],
+                subjectType: event.title.split("<br>")[1],
+                workerName: event.title.split("<br>")[3],
+                workerSurname: event.title.split("<br>")[4],
+                startDate: event.start._d,
+                endDate: event.end._d,
+                dayOfWeek: "test",
+                groupId: event.resourceId,
+                auditorium: "test"
+            };
+            var json = JSON.stringify(lectureDto);
+            $.ajax({
+                url: '/postLecture',
+                type: 'POST',
+                dataType: "json",
+                contentType: "application/json",
+                data: json
+            });
+        }
+
         $(function () { // document ready
 
             $('#external-events .fc-event').each(function () {
@@ -35,6 +58,8 @@
             $('#calendar').fullCalendar({
                 defaultView: 'agendaDay',
                 defaultDate: '2018-12-06',
+                defaultTimedEventDuration: moment.duration("01:30:00"),
+                forceEventDuration: true,
                 dragRevertDuration: 0,
                 droppable: true,
                 editable: true,
@@ -63,12 +88,12 @@
                 allDaySlot: false,
 
                 resources: [
-                    {id: 'a', title: 'GR 1', eventColor: 'green'},
-                    {id: 'b', title: 'GR 2', eventColor: 'green'},
-                    {id: 'c', title: 'GR 3', eventColor: 'orange'},
-                    {id: 'd', title: 'GR 4', eventColor: 'orange'},
-                    {id: 'e', title: 'GR 5', eventColor: 'red'},
-                    {id: 'f', title: 'GR 6', eventColor: 'red'}
+                    {id: '1', title: 'GR 1', eventColor: 'green'},
+                    {id: '2', title: 'GR 2', eventColor: 'green'},
+                    {id: '3', title: 'GR 3', eventColor: 'orange'},
+                    {id: '4', title: 'GR 4', eventColor: 'orange'},
+                    {id: '5', title: 'GR 5', eventColor: 'red'},
+                    {id: '6', title: 'GR 6', eventColor: 'red'}
                 ],
                 /*events: [
                     {id: '1', resourceId: 'a', start: '2018-04-06', end: '2018-04-08', title: 'event 1'},
@@ -82,7 +107,12 @@
                 ]*/
                 drop: function (date, jsEvent, ui, resourceId) {
                     console.log('drop', date.format(), resourceId);
+                    var originalEventObject = $(this).data('clientEvents');
 
+                    // we need to copy it, so that multiple events don't have a reference to the same object
+                    var copiedEventObject = $.extend({}, originalEventObject);
+
+                    console.log('copied event', $(this).data('clientEvents'));
                     // is the "remove after drop" checkbox checked?
                     if ($('#drop-remove').is(':checked')) {
                         // if so, remove the element from the "Draggable Events" list
@@ -90,27 +120,9 @@
                     }
                 },
                 eventReceive: function (event) { // called when a proper external event is dropped
-                    $.ajax({
-                        url: '/postLecture',
-                        type: 'POST',
-                        dataType: "application/json",
-                        contentType: "text/plain",
-                        data: {
-                            json: JSON.stringify({
-                                id: 1,
-                                name: event.title.split("<br>")[0],
-                                type: event.title.split("<br>")[1],
-                                workerName: event.title.split("<br>")[3],
-                                workerSurname: event.title.split("<br>")[4],
-                                startTime: event.start._d,
-                                dayOfWeek: "test",
-                                groupName: event.resourceId,
-                                auditorium: "test"
-                            })
-                        }
-                    });
+                    updateElement(event);
                     console.log('eventReceive', event);
-                    console.log(event.title.split("<br>")[0])
+                    console.log(event.start._d)
                 },
 
                 eventDrop: function (event, element) { // called when an event (already on the calendar) is moved
@@ -241,12 +253,12 @@
             + ${lecture.workerInSubject.subject.type} + '<br/>'
             + ${lecture.workerInSubject.worker.title} + '<br/>'
             + ${lecture.workerInSubject.worker.name} + '<br/>'
-            + ${lecture.workerInSubject.worker.surname}" class='fc-event'>My Event 1
+            + ${lecture.workerInSubject.worker.surname}" class='fc-event' th:id="${lecture.id}">My Event 1
                 </div>
             </form>
         </div>
         <p>
-            <input type='checkbox' id='drop-remove'/>
+            <input type='checkbox' id='drop-remove' checked="checked"/>
             <label for='drop-remove'>remove after drop</label>
         </p>
     </div>
