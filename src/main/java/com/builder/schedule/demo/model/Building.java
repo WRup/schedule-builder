@@ -12,8 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "BUILDING")
@@ -27,5 +27,5 @@ public class Building {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "building")
-    private Set<Auditorium> auditoriums = new HashSet<>();
+    private List<Auditorium> auditoriums = new ArrayList<>();
 }

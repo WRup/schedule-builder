@@ -2,6 +2,7 @@ package com.builder.schedule.demo.controllers;
 
 
 import com.builder.schedule.demo.common.SuccessMessage;
+import com.builder.schedule.demo.services.business.logic.BuildingService;
 import com.builder.schedule.demo.services.business.logic.LectureService;
 import com.builder.schedule.demo.services.business.logic.YearService;
 import com.builder.schedule.demo.services.dto.LectureDto;
@@ -18,16 +19,19 @@ public class CalendarController {
 
     private final LectureService lectureService;
     private final YearService yearService;
+    private final BuildingService buildingService;
 
-    public CalendarController(LectureService lectureService, YearService yearService) {
+    public CalendarController(LectureService lectureService, YearService yearService, BuildingService buildingService) {
         this.lectureService = lectureService;
         this.yearService = yearService;
+        this.buildingService = buildingService;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/scheduler")
     public String index(Model model) {
         model.addAttribute("lectures", lectureService.findAll());
         model.addAttribute("years", yearService.findAll());
+        model.addAttribute("buildings", buildingService.findAll());
         return "calendar/scheduler";
     }
 
