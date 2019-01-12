@@ -23,6 +23,7 @@ function updateElement(event) {
 
 $(function () { // document ready
 
+
     $('#external-events .fc-event').each(function () {
 
         // store data so the calendar knows to render an event upon drop
@@ -157,7 +158,6 @@ $(function () { // document ready
             //$('#modalBody').html(calEvent.description);
             $('#eventUrl').attr('href', calEvent.url);
             $('#fullCalModal').modal();
-            console.log(modal.find('#modalTitle').text())
         }
     });
 
