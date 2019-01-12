@@ -47,3 +47,7 @@ body {
     margin: 0;
     vertical-align: middle;
 }
+
+.dropdown-menu > li > a:hover {
+    background: #A5A5A5 none !important;
+}

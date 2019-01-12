@@ -157,6 +157,7 @@ $(function () { // document ready
             //$('#modalBody').html(calEvent.description);
             $('#eventUrl').attr('href', calEvent.url);
             $('#fullCalModal').modal();
+            console.log(modal.find('#modalTitle').text())
         }
     });
 

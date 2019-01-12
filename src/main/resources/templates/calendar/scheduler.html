@@ -52,18 +52,18 @@
                     <div class="btn-group">
                         <div class="btn-group" th:each="building:${buildings}">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                                    th:utext="${building.name}">
+                                    aria-haspopup="true" aria-expanded="false" th:utext="${building.name}">
                                 Sony <span class="caret"></span></button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li th:each="auditorium:${building.auditoriums}"><a href="#"
-                                                                                    th:utext="${auditorium.name}">Tablet</a>
+                            <div class="dropdown-menu">
+                                <li th:each="auditorium:${building.auditoriums}">
+                                    <a class="dropdown-item" href="#" th:utext="${auditorium.name}">Tablet</a>
                                 </li>
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
                     <button class="btn btn-primary"><a id="eventUrl" target="_blank">Event Page</a></button>
                 </div>
             </div>
