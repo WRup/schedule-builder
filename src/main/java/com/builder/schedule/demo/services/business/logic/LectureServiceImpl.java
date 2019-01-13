@@ -1,6 +1,7 @@
 package com.builder.schedule.demo.services.business.logic;
 
 
+import com.builder.schedule.demo.model.Auditorium;
 import com.builder.schedule.demo.model.Group;
 import com.builder.schedule.demo.model.Lecture;
 import com.builder.schedule.demo.model.Subject;
@@ -22,14 +23,16 @@ public class LectureServiceImpl implements LectureService {
     private final SubjectService subjectService;
     private final WorkerInSubjectService workerInSubjectService;
     private final GroupService groupService;
+    private final AuditoriumService auditoriumService;
     //reposy pozostalych potrzebnych obiektow
 
-    public LectureServiceImpl(LectureRepository lectureRepository, WorkerService workerService, SubjectService subjectService, WorkerInSubjectService workerInSubjectService, GroupService groupService) {
+    public LectureServiceImpl(LectureRepository lectureRepository, WorkerService workerService, SubjectService subjectService, WorkerInSubjectService workerInSubjectService, GroupService groupService, AuditoriumService auditoriumService) {
         this.lectureRepository = lectureRepository;
         this.workerService = workerService;
         this.subjectService = subjectService;
         this.workerInSubjectService = workerInSubjectService;
         this.groupService = groupService;
+        this.auditoriumService = auditoriumService;
     }
 
     @Override
@@ -39,7 +42,8 @@ public class LectureServiceImpl implements LectureService {
         Worker worker = workerService.findByNameAndSurname(dto.getWorkerName(), dto.getWorkerSurname());
         Subject subject = subjectService.findByNameAndType(dto.getSubjectName(), dto.getSubjectType());
         WorkerInSubject workerInSubject = workerInSubjectService.findBySubjectAndWorker(subject, worker);
-        lectureRepository.save(LectureAssembler.toEntity(dto, workerInSubject, group));
+        Auditorium auditorium = auditoriumService.findByName(dto.getAuditoriumName());
+        lectureRepository.save(LectureAssembler.toEntity(dto, workerInSubject, group, auditorium));
     }
 
     @Override

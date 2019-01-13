@@ -1,4 +1,11 @@
 function updateElement(event) {
+    var auditoriumName;
+    if (event.title.indexOf('Sala') !== -1) {
+        auditoriumName = event.title.split(": ")[1];
+    }
+    else {
+        auditoriumName = ""
+    }
     var lectureDto = {
         id: 1,
         subjectName: event.title.split("<br>")[0],
@@ -9,7 +16,7 @@ function updateElement(event) {
         endDate: event.end._d,
         dayOfWeek: "test",
         groupId: event.resourceId,
-        auditorium: "test"
+        auditorium: auditoriumName
     };
     var json = JSON.stringify(lectureDto);
     $.ajax({
@@ -20,6 +27,10 @@ function updateElement(event) {
         data: json
     });
 }
+
+$(document).on('shown.bs.modal', '#fullCalModal', function (e) {
+    console.log('trigger-event', $(e.relatedTarget));
+});
 
 $(function () { // document ready
 
@@ -157,7 +168,11 @@ $(function () { // document ready
             $('#modalTitle').html(calEvent.title);
             //$('#modalBody').html(calEvent.description);
             $('#eventUrl').attr('href', calEvent.url);
+            $('#save_btn').attr("disabled", true);
             $('#fullCalModal').modal();
+            $('#saveBtn').on('click', function () {
+                saveAuditorium(calEvent)
+            })
         }
     });
 

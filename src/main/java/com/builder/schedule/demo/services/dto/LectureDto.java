@@ -21,5 +21,5 @@ public class LectureDto {
     private String dayOfWeek;
 
     private Long groupId;
-    private String auditoruim;
+    private String auditoriumName;
 }

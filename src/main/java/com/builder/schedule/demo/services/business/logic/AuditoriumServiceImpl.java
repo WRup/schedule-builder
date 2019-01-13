@@ -40,4 +40,9 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     public void deleteById(Long aLong) {
         auditoriumRepository.deleteById(aLong);
     }
+
+    @Override
+    public Auditorium findByName(String name) {
+        return auditoriumRepository.findByName(name);
+    }
 }
