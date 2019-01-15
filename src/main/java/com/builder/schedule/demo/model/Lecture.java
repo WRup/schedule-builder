@@ -45,7 +45,4 @@ public class Lecture {
     public Lecture(WorkerInSubject workerInSubject) {
         this.workerInSubject = workerInSubject;
     }
-
-    public Lecture() {
-    }
 }

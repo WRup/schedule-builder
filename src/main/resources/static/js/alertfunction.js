@@ -27,14 +27,15 @@ function showAlert(auditorium, currId) {
     return currId;
 }
 
-function saveAuditorium(event) {
+function saveAuditorium(event, curr_id) {
     if (event.title.indexOf('Sala') !== -1) {
         event.title = event.title.split("Sala")[0] + 'Sala: ' + document.getElementById(prevId).textContent;
     }
     else {
         event.title = event.title + 'Sala: ' + document.getElementById(prevId).textContent;
     }
-    console.log('event-title', event.title);
     $('#calendar').fullCalendar('updateEvent', event);
+    event.id = curr_id;
+    console.log('updateEvent', event);
     updateElement(event);
 }

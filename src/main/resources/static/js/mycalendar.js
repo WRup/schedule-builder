@@ -1,15 +1,5 @@
 var curr_id;
 
-function updateEventDetails(event) {
-    var lectureDetailsDto =
-        {
-            id: event.resourceId,
-            startDate: event.start._d,
-            endDate: event.end._d,
-            groupId: event.resourceId
-        }
-}
-
 function updateElement(event) {
     var auditoriumName;
     if (event.title.indexOf('Sala') !== -1) {
@@ -19,7 +9,7 @@ function updateElement(event) {
         auditoriumName = ""
     }
     var lectureDto = {
-        id: event.resourceId,
+        id: event.id.split("_")[1],
         subjectName: event.title.split("<br>")[0],
         subjectType: event.title.split("<br>")[1],
         workerName: event.title.split("<br>")[3],
@@ -38,10 +28,6 @@ function updateElement(event) {
         data: json
     });
 }
-
-$(document).on('shown.bs.modal', '#fullCalModal', function (e) {
-    console.log('trigger-event', $(e.relatedTarget));
-});
 
 $(function () { // document ready
 
@@ -121,7 +107,7 @@ $(function () { // document ready
         ]*/
         drop: function (date, jsEvent, ui, resourceId) {
             console.log('drop', date.format(), resourceId);
-            curr_id = resourceId;
+            curr_id = this.id;
             // is the "remove after drop" checkbox checked?
             if ($('#drop-remove').is(':checked')) {
                 // if so, remove the element from the "Draggable Events" list
@@ -144,7 +130,7 @@ $(function () { // document ready
 
             if (isEventOverDiv(jsEvent.clientX, jsEvent.clientY)) {
                 $('#calendar').fullCalendar('removeEvents', event._id);
-                var el = $("<div class='fc-event' id='${event.resourceId}'>").appendTo('#external-events-listing').html(event.title);
+                var el = $("<div class='fc-event'>").appendTo('#external-events-listing').html(event.title);
                 el.draggable({
                     zIndex: 999,
                     revert: true,
@@ -178,12 +164,11 @@ $(function () { // document ready
         eventClick: function (calEvent, jsEvent, view) {
 
             $('#modalTitle').html(calEvent.title);
-            //$('#modalBody').html(calEvent.description);
             $('#eventUrl').attr('href', calEvent.url);
             $('#save_btn').attr("disabled", true);
             $('#fullCalModal').modal();
             $('#saveBtn').on('click', function () {
-                saveAuditorium(calEvent)
+                saveAuditorium(calEvent, curr_id);
             })
         }
     });
@@ -198,12 +183,10 @@ var isEventOverDiv = function (x, y) {
     offset.bottom = external_events.height() + offset.top;
 
     // Compare
-    if (x >= offset.left
+    return x >= offset.left
         && y >= offset.top
         && x <= offset.right
-        && y <= offset.bottom) {
-        return true;
-    }
-    return false;
+        && y <= offset.bottom;
 
-}
+
+};
