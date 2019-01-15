@@ -1,12 +1,12 @@
 package com.builder.schedule.demo.model;
 
-import com.builder.schedule.demo.enumexample.Days;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +19,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "LECTURE")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Lecture {
 
     @Id
@@ -29,9 +32,6 @@ public class Lecture {
     private Date startDate;
     @Column(name = "end_date")
     private Date endDate;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "day_of_week")
-    private Days days;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "year_group_id")
     private Group group;

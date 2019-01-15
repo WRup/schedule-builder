@@ -18,8 +18,6 @@ public class LectureDto {
     private Date startDate;
     private Date endDate;
 
-    private String dayOfWeek;
-
     private Long groupId;
     private String auditoriumName;
 }

@@ -1,5 +1,15 @@
 var curr_id;
 
+function updateEventDetails(event) {
+    var lectureDetailsDto =
+        {
+            id: event.resourceId,
+            startDate: event.start._d,
+            endDate: event.end._d,
+            groupId: event.resourceId
+        }
+}
+
 function updateElement(event) {
     var auditoriumName;
     if (event.title.indexOf('Sala') !== -1) {
@@ -16,7 +26,6 @@ function updateElement(event) {
         workerSurname: event.title.split("<br>")[4],
         startDate: event.start._d,
         endDate: event.end._d,
-        dayOfWeek: "test",
         groupId: event.resourceId,
         auditoriumName: auditoriumName
     };
@@ -135,7 +144,7 @@ $(function () { // document ready
 
             if (isEventOverDiv(jsEvent.clientX, jsEvent.clientY)) {
                 $('#calendar').fullCalendar('removeEvents', event._id);
-                var el = $("<div class='fc-event' id='{$event.resourceId}'>").appendTo('#external-events-listing').html(event.title);
+                var el = $("<div class='fc-event' id='${event.resourceId}'>").appendTo('#external-events-listing').html(event.title);
                 el.draggable({
                     zIndex: 999,
                     revert: true,

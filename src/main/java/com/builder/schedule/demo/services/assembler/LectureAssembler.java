@@ -1,6 +1,5 @@
 package com.builder.schedule.demo.services.assembler;
 
-import com.builder.schedule.demo.enumexample.Days;
 import com.builder.schedule.demo.model.Auditorium;
 import com.builder.schedule.demo.model.Group;
 import com.builder.schedule.demo.model.Lecture;
@@ -23,8 +22,9 @@ public class LectureAssembler {
         entity.setGroup(group);
         entity.setStartDate(dto.getStartDate());
         entity.setEndDate(dto.getEndDate());
-        entity.setDays(Days.MONDAY);
 
         return entity;
     }
+
+
 }

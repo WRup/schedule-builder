@@ -1,6 +1,9 @@
 package com.builder.schedule.demo.model;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +21,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "YEAR_GROUP")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Group {
 
     @Id
@@ -33,9 +39,6 @@ public class Group {
     private Year year;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "group")
     private Set<Lecture> lectures = new HashSet<>();
-
-    public Group() {
-    }
 
     public Group(String name, String type, Year year) {
         this.name = name;
