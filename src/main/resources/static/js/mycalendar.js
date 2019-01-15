@@ -1,3 +1,5 @@
+var curr_id;
+
 function updateElement(event) {
     var auditoriumName;
     if (event.title.indexOf('Sala') !== -1) {
@@ -7,7 +9,7 @@ function updateElement(event) {
         auditoriumName = ""
     }
     var lectureDto = {
-        id: 1,
+        id: event.resourceId,
         subjectName: event.title.split("<br>")[0],
         subjectType: event.title.split("<br>")[1],
         workerName: event.title.split("<br>")[3],
@@ -110,12 +112,7 @@ $(function () { // document ready
         ]*/
         drop: function (date, jsEvent, ui, resourceId) {
             console.log('drop', date.format(), resourceId);
-            var originalEventObject = $(this).data('clientEvents');
-
-            // we need to copy it, so that multiple events don't have a reference to the same object
-            var copiedEventObject = $.extend({}, originalEventObject);
-
-            console.log('copied event', $(this).data('clientEvents'));
+            curr_id = resourceId;
             // is the "remove after drop" checkbox checked?
             if ($('#drop-remove').is(':checked')) {
                 // if so, remove the element from the "Draggable Events" list
@@ -123,6 +120,7 @@ $(function () { // document ready
             }
         },
         eventReceive: function (event) { // called when a proper external event is dropped
+            event.id = curr_id;
             updateElement(event);
             console.log('eventReceive', event);
             console.log(event.start._d)
@@ -137,13 +135,14 @@ $(function () { // document ready
 
             if (isEventOverDiv(jsEvent.clientX, jsEvent.clientY)) {
                 $('#calendar').fullCalendar('removeEvents', event._id);
-                var el = $("<div class='fc-event'>").appendTo('#external-events-listing').html(event.title);
+                var el = $("<div class='fc-event' id='{$event.resourceId}'>").appendTo('#external-events-listing').html(event.title);
                 el.draggable({
                     zIndex: 999,
                     revert: true,
                     revertDuration: 0
                 });
                 el.data('event', {title: event.title, id: event.id, stick: true});
+                console.log('html-even', el)
             }
         },
 
