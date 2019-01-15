@@ -16,7 +16,7 @@ function updateElement(event) {
         endDate: event.end._d,
         dayOfWeek: "test",
         groupId: event.resourceId,
-        auditorium: auditoriumName
+        auditoriumName: auditoriumName
     };
     var json = JSON.stringify(lectureDto);
     $.ajax({
@@ -57,10 +57,12 @@ $(function () { // document ready
 
     $('#calendar').fullCalendar({
         defaultView: 'agendaDay',
-        defaultDate: '2018-12-06',
+        minTime: "07:00:00",
+        maxTime: "21:00:00",
         defaultTimedEventDuration: moment.duration("01:30:00"),
         forceEventDuration: true,
         dragRevertDuration: 0,
+        slotLabelFormat: "HH:mm",
         droppable: true,
         editable: true,
         selectable: true,
@@ -95,6 +97,7 @@ $(function () { // document ready
             {id: '5', title: 'GR 5', eventColor: 'red'},
             {id: '6', title: 'GR 6', eventColor: 'red'}
         ],
+        timeFormat: 'HH:mm',
         /*events: [
             {id: '1', resourceId: 'a', start: '2018-04-06', end: '2018-04-08', title: 'event 1'},
             {
@@ -126,6 +129,7 @@ $(function () { // document ready
         },
 
         eventDrop: function (event, element) { // called when an event (already on the calendar) is moved
+            updateElement(event);
             console.log('eventDrop', event);
         },
 
