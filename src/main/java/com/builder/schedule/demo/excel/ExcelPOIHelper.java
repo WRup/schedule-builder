@@ -34,6 +34,7 @@ public class ExcelPOIHelper {
         subject = new Subject();
         boolean checker = false;
         for (Row row : sheet) {
+
             worker = new Worker();
             workerInSubject = new WorkerInSubject();
             if(row.cellIterator().next().getStringCellValue().equals("")) {
@@ -55,6 +56,8 @@ public class ExcelPOIHelper {
                         case 2:
                             year.setStudents(cell.getStringCellValue());
                             years.add(year);
+                            break;
+                        default:
                             break;
                     }
                 }
@@ -80,6 +83,8 @@ public class ExcelPOIHelper {
                             subjects.add(subject);
                             groups = checkGroups(subject, groups, year);
                             break;
+                        default:
+                            break;
                     }
                 }
                 continue;
@@ -104,6 +109,8 @@ public class ExcelPOIHelper {
                             workerInSubject.setSubject(subject);
                             workerInSubject.setHours(cell.getStringCellValue());
                             workerInSubjects.add(workerInSubject);
+                            break;
+                        default:
                             break;
                     }
                 }

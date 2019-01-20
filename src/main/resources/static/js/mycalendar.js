@@ -39,7 +39,8 @@ $(function () { // document ready
             //title: $.trim($(this).text()), // use the element's text as the event title
             title: $(this).html(),
             stick: true,// maintain when user navigates (see docs on the renderEvent method)
-            description: 'Some description'
+            description: 'Some description',
+            color: $(this).data('color')
         });
 
         // make the event draggable using jQuery UI
@@ -54,12 +55,15 @@ $(function () { // document ready
 
     $('#calendar').fullCalendar({
         defaultView: 'agendaDay',
+        themeSystem: 'jquery-ui',
         minTime: "07:00:00",
         maxTime: "21:00:00",
         defaultTimedEventDuration: moment.duration("01:30:00"),
         forceEventDuration: true,
         dragRevertDuration: 0,
+        aspectRatio: 1.85,
         slotLabelFormat: "HH:mm",
+        handleWindowResize: true,
         droppable: true,
         editable: true,
         selectable: true,
@@ -68,6 +72,12 @@ $(function () { // document ready
             left: 'prev,next today',
             center: 'title'
             //right: 'agendaDay,agendaTwoDay,agendaWeek,month'
+        },
+        themeButtonIcons: {
+            prev: 'circle-triangle-w',
+            next: 'circle-triangle-e',
+            prevYear: 'seek-prev',
+            nextYear: 'seek-next'
         },
         views: {
             agendaTwoDay: {
@@ -80,6 +90,9 @@ $(function () { // document ready
 
                 //// uncomment this line to group by day FIRST with resources underneath
                 //groupByDateAndResource: true
+            },
+            day: {
+                titleFormat: 'dddd, MMMM Do YYYY'
             }
         },
 
@@ -87,12 +100,12 @@ $(function () { // document ready
         allDaySlot: false,
 
         resources: [
-            {id: '1', title: 'GR 1', eventColor: 'green'},
-            {id: '2', title: 'GR 2', eventColor: 'green'},
+            {id: '1', title: 'GR 1', eventColor: 'orange'},
+            {id: '2', title: 'GR 2', eventColor: 'orange'},
             {id: '3', title: 'GR 3', eventColor: 'orange'},
             {id: '4', title: 'GR 4', eventColor: 'orange'},
-            {id: '5', title: 'GR 5', eventColor: 'red'},
-            {id: '6', title: 'GR 6', eventColor: 'red'}
+            {id: '5', title: 'GR 5', eventColor: 'orange'},
+            {id: '6', title: 'GR 6', eventColor: 'orange'}
         ],
         timeFormat: 'HH:mm',
         /*events: [
@@ -108,11 +121,12 @@ $(function () { // document ready
         drop: function (date, jsEvent, ui, resourceId) {
             console.log('drop', date.format(), resourceId);
             curr_id = this.id;
+            $(this).remove();
             // is the "remove after drop" checkbox checked?
-            if ($('#drop-remove').is(':checked')) {
+            /*if ($('#drop-remove').is(':checked')) {
                 // if so, remove the element from the "Draggable Events" list
                 $(this).remove();
-            }
+            }*/
         },
         eventReceive: function (event) { // called when a proper external event is dropped
             event.id = curr_id;
@@ -130,7 +144,7 @@ $(function () { // document ready
 
             if (isEventOverDiv(jsEvent.clientX, jsEvent.clientY)) {
                 $('#calendar').fullCalendar('removeEvents', event._id);
-                var el = $("<div class='fc-event'>").appendTo('#external-events-listing').html(event.title);
+                var el = $("<td class='fc-event' style='background-color: orange'>").appendTo('#external-events-listing').html(event.title);
                 el.draggable({
                     zIndex: 999,
                     revert: true,
