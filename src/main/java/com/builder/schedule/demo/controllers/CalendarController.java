@@ -29,9 +29,10 @@ public class CalendarController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/scheduler")
     public String index(Model model) {
-        model.addAttribute("lectures", lectureService.findAll());
+        model.addAttribute("lectures_event", lectureService.findLecturesByStartDateIsNotNull());
         model.addAttribute("years", yearService.findAll());
         model.addAttribute("buildings", buildingService.findAll());
+        model.addAttribute("lectures_external", lectureService.findLecturesByStartDateIsNull());
         return "calendar/scheduler";
     }
 

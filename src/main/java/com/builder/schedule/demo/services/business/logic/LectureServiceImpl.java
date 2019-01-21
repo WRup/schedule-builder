@@ -57,4 +57,14 @@ public class LectureServiceImpl implements LectureService {
     public Lecture findById(Long aLong) {
         return lectureRepository.findById(aLong).orElse(null);
     }
+
+    @Override
+    public List<Lecture> findLecturesByStartDateIsNull() {
+        return lectureRepository.findLecturesByStartDateIsNull();
+    }
+
+    @Override
+    public List<Lecture> findLecturesByStartDateIsNotNull() {
+        return lectureRepository.findLecturesByStartDateIsNotNull();
+    }
 }

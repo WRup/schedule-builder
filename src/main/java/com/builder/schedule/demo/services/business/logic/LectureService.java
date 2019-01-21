@@ -12,4 +12,8 @@ public interface LectureService {
     List<Lecture> findAll();
 
     Lecture findById(Long aLong);
+
+    List<Lecture> findLecturesByStartDateIsNull();
+
+    List<Lecture> findLecturesByStartDateIsNotNull();
 }

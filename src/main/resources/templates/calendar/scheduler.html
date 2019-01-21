@@ -32,7 +32,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="lecture:${lectures}" id='external-events-listing'>
+            <tr th:each="lecture:${lectures_external}" id='external-events-listing'>
                 <td th:utext="${lecture.workerInSubject.subject.name} + '<br/>'
             + ${lecture.workerInSubject.subject.type} + '<br/>'
             + ${lecture.workerInSubject.worker.title} + '<br/>'
