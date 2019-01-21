@@ -72,6 +72,7 @@
     </div>-->
 
     <div id='calendar' style="width: 88%"></div>
+
     <div id="fullCalModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -108,7 +109,35 @@
         </div>
     </div>
     <div style='clear:both'></div>
+    <div th:each="lectures2:${lectures_event}">
+        <script th:inline="javascript">
+            $(document).ready(function () {
 
+
+                /*<![CDATA[*/
+                var name = /*[[${lectures2.workerInSubject.subject.name}]]*/ null;
+                var type = /*[[${lectures2.workerInSubject.subject.type}]]*/ null;
+                var worker_title = /*[[${lectures2.workerInSubject.worker.title}]]*/ null;
+                var worker_name = /*[[${lectures2.workerInSubject.worker.name}]]*/ null;
+                var worker_surname = /*[[${lectures2.workerInSubject.worker.surname}]]*/ null;
+                var title = name + "<br/>"
+                    + type + '<br/>'
+                    + worker_title + '<br/>'
+                    + worker_name + '<br/>'
+                    + worker_surname + '<br/>';
+                var lecture_id = "lec_" + /*[[${lectures2.id}]]*/ null;
+                var start_date = /*[[${lectures2.startDate}]]*/ null;
+                var end_date = /*[[${lectures2. startDate}]]*/ null;
+                var group_id = /*[[${lectures2.group.id}]]*/ null;
+                console.log('title', title);
+
+                renderLectureEvent(title, start_date, end_date, group_id, lecture_id);
+
+                /*]]>*/
+            });
+
+        </script>
+    </div>
 </div>
 </body>
 </html>

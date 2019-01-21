@@ -39,3 +39,16 @@ function saveAuditorium(event, curr_id) {
     console.log('updateEvent', event);
     updateElement(event);
 }
+
+
+function renderLectureEvent(lecture_title, lecture_start_date, lecture_end_date, group_id, lecture_id) {
+    var event = {
+        title: lecture_title,
+        start: moment(lecture_start_date),
+        end: moment(lecture_end_date),
+        resourceId: group_id,
+        id: lecture_id
+    };
+    $('#calendar').fullCalendar('renderEvent', event, true);
+    console.log("renderedEvent", event);
+}
