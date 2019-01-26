@@ -45,4 +45,11 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     public Auditorium findByName(String name) {
         return auditoriumRepository.findByName(name);
     }
+
+    @Override
+    public List<Long> findOccupiedAuditorium(String date) {
+        String startDate = date.split(",")[0];
+        String endDate = date.split(",")[1];
+        return auditoriumRepository.findOccupiedAuditoriums(startDate, endDate);
+    }
 }

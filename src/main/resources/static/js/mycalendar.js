@@ -1,5 +1,21 @@
 var curr_id;
 
+function getAuditoriums(startDate, endDate) {
+    var audDate = startDate + "," + endDate;
+    var outputData;
+
+    $.ajax({
+        type: 'GET',
+        url: '/getOccupiedAuditoriums/' + audDate,
+        success: function (result) {
+            console.log('aud_reuslt', result);
+            outputData = result;
+        }
+    });
+
+    return outputData;
+}
+
 function updateElement(event) {
     var auditoriumName;
     if (event.title.indexOf('Sala') !== -1) {
@@ -10,10 +26,10 @@ function updateElement(event) {
     }
     var lectureDto = {
         id: event.id.split("_")[1],
-        subjectName: event.title.split("<br/>")[0],
-        subjectType: event.title.split("<br/>")[1],
-        workerName: event.title.split("<br/>")[3],
-        workerSurname: event.title.split("<br/>")[4],
+        subjectName: event.title.split("<br>")[0],
+        subjectType: event.title.split("<br>")[1],
+        workerName: event.title.split("<br>")[3],
+        workerSurname: event.title.split("<br>")[4],
         startDate: event.start._d,
         endDate: event.end._d,
         groupId: event.resourceId,
@@ -95,7 +111,6 @@ $(function () { // document ready
                 titleFormat: 'dddd, MMMM Do YYYY'
             }
         },
-
         //// uncomment this line to hide the all-day slot
         allDaySlot: false,
 
@@ -108,36 +123,23 @@ $(function () { // document ready
             {id: '6', title: 'GR 6', eventColor: 'orange'}
         ],
         timeFormat: 'HH:mm',
-        /*events: [
-            {id: '1', resourceId: 'a', start: '2018-04-06', end: '2018-04-08', title: 'event 1'},
-            {
-                id: '2',
-                resourceId: 'a',
-                start: '2018-04-07T09:00:00',
-                end: '2018-04-07T14:00:00',
-                title: 'Line 1 <br/>This is Line 2...'
-            },
-        ]*/
+
         drop: function (date, jsEvent, ui, resourceId) {
             console.log('drop', date.format(), resourceId);
             curr_id = this.id;
             $(this).remove();
-            // is the "remove after drop" checkbox checked?
-            /*if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
-                $(this).remove();
-            }*/
         },
         eventReceive: function (event) { // called when a proper external event is dropped
             event.id = curr_id;
+            $('#calendar').fullCalendar('removeEvents', event._id);
+            $('#calendar').fullCalendar('renderEvent', event, true);
             updateElement(event);
             console.log('eventReceive', event);
-            console.log(event.start._d)
         },
 
         eventDrop: function (event, element) { // called when an event (already on the calendar) is moved
+            console.log('event-drop', event)
             updateElement(event);
-            console.log('eventDrop', event);
         },
 
         eventDragStop: function (event, jsEvent, ui, view) {
@@ -150,7 +152,10 @@ $(function () { // document ready
                 if (event.title.indexOf('Sala') !== -1) {
                     event.title = event.title.split(": ")[1];
                 }
-                var el = $("<td class='fc-event' style='background-color: orange'>").appendTo('#external-events-listing').html(event.title);
+                updateElement(event);
+                var el = $("<tr id='external-events-listing'>").appendTo('#tableBody').html(event.title);
+                var el2 = $("<td class='fc-event' style='background-color: orange'>").appendTo()
+                el.setAttribute("id", event.id);
                 el.draggable({
                     zIndex: 999,
                     revert: true,
@@ -158,7 +163,8 @@ $(function () { // document ready
                 });
                 el.data('event', {title: event.title, id: event.id, stick: true});
                 console.log('html-even', el);
-                updateElement(event);
+                console.log('event-title', event.title);
+
             }
         },
 
@@ -189,7 +195,7 @@ $(function () { // document ready
             $('#save_btn').attr("disabled", true);
             $('#fullCalModal').modal();
             $('#saveBtn').on('click', function () {
-                saveAuditorium(calEvent, curr_id);
+                saveAuditorium(calEvent, getAuditoriums(calEvent.start._d, calEvent.end._d));
             })
         }
     });

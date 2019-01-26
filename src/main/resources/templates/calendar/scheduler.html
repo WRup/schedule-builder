@@ -31,7 +31,7 @@
                 </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tableBody">
             <tr th:each="lecture:${lectures_external}" id='external-events-listing'>
                 <td th:utext="${lecture.workerInSubject.subject.name} + '<br/>'
             + ${lecture.workerInSubject.subject.type} + '<br/>'

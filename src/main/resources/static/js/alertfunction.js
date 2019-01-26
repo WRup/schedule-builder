@@ -3,6 +3,7 @@ var prevId = null;
 
 $(document).ready(function () {
     $("#success-alert").hide();
+    $("#save_btn").attr("disabled", true);
 
 });
 
