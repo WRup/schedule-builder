@@ -10,10 +10,10 @@ function updateElement(event) {
     }
     var lectureDto = {
         id: event.id.split("_")[1],
-        subjectName: event.title.split("<br>")[0],
-        subjectType: event.title.split("<br>")[1],
-        workerName: event.title.split("<br>")[3],
-        workerSurname: event.title.split("<br>")[4],
+        subjectName: event.title.split("<br/>")[0],
+        subjectType: event.title.split("<br/>")[1],
+        workerName: event.title.split("<br/>")[3],
+        workerSurname: event.title.split("<br/>")[4],
         startDate: event.start._d,
         endDate: event.end._d,
         groupId: event.resourceId,
@@ -144,6 +144,12 @@ $(function () { // document ready
 
             if (isEventOverDiv(jsEvent.clientX, jsEvent.clientY)) {
                 $('#calendar').fullCalendar('removeEvents', event._id);
+                event.start._d = null;
+                event.end._d = null;
+                event.resourceId = null;
+                if (event.title.indexOf('Sala') !== -1) {
+                    event.title = event.title.split(": ")[1];
+                }
                 var el = $("<td class='fc-event' style='background-color: orange'>").appendTo('#external-events-listing').html(event.title);
                 el.draggable({
                     zIndex: 999,
@@ -151,7 +157,8 @@ $(function () { // document ready
                     revertDuration: 0
                 });
                 el.data('event', {title: event.title, id: event.id, stick: true});
-                console.log('html-even', el)
+                console.log('html-even', el);
+                updateElement(event);
             }
         },
 

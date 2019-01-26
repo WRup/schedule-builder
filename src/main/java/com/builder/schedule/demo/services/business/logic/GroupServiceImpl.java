@@ -5,6 +5,7 @@ import com.builder.schedule.demo.model.repository.GroupRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -23,7 +24,12 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group findById(Long aLong) {
-        return groupRepository.findById(aLong).orElse(null);
+        Optional<Long> opt = Optional.ofNullable(aLong);
+        if(opt.isPresent()) {
+            return groupRepository.findById(aLong).orElse(null);
+        } else {
+            return null;
+        }
     }
 
     @Override
