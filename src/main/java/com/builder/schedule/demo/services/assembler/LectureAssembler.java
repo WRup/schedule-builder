@@ -22,6 +22,8 @@ public class LectureAssembler {
         entity.setGroup(group);
         entity.setStartDate(dto.getStartDate());
         entity.setEndDate(dto.getEndDate());
+        System.out.println(dto.getStartDate());
+        System.out.println(dto.getEndDate());
 
         return entity;
     }

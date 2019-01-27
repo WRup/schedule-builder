@@ -18,6 +18,8 @@ function getAuditoriums(startDate, endDate) {
 
 function updateElement(event) {
     var auditoriumName;
+    console.log('event-start-date', event.start._d);
+    console.log('event-end-date', event.end._d);
     if (event.title.indexOf('Sala') !== -1) {
         auditoriumName = event.title.split(": ")[1];
     }
@@ -75,6 +77,7 @@ $(function () { // document ready
         themeSystem: 'jquery-ui',
         minTime: "07:00:00",
         maxTime: "21:00:00",
+        timezone: 'local',
         defaultTimedEventDuration: moment.duration("01:30:00"),
         forceEventDuration: true,
         dragRevertDuration: 0,
