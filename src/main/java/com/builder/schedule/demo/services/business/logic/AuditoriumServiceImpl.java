@@ -1,9 +1,12 @@
 package com.builder.schedule.demo.services.business.logic;
 
+import com.builder.schedule.demo.common.DateConverter;
 import com.builder.schedule.demo.model.Auditorium;
 import com.builder.schedule.demo.model.repository.AuditoriumRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -47,9 +50,14 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     }
 
     @Override
-    public List<Long> findOccupiedAuditorium(String date) {
-        String startDate = date.split(",")[0];
-        String endDate = date.split(",")[1];
+    public List<Long> findOccupiedAuditorium(String date) throws ParseException {
+        DateConverter dateConverter = new DateConverter();
+        Date startDate = dateConverter.convertDate(date.split(",")[0]);
+        Date endDate = dateConverter.convertDate(date.split(",")[1]);
+
+        System.out.println(startDate);
+        System.out.println(endDate);
+
         return auditoriumRepository.findOccupiedAuditoriums(startDate, endDate);
     }
 }

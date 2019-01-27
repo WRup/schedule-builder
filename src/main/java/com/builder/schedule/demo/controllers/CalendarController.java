@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -51,7 +52,7 @@ public class CalendarController {
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/getOccupiedAuditoriums/{date}")
-    public List<Long> getOccupiedAuditoriums(@PathVariable String date) {
+    public List<Long> getOccupiedAuditoriums(@PathVariable String date) throws ParseException {
         return auditoriumService.findOccupiedAuditorium(date);
     }
 

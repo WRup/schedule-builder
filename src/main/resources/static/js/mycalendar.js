@@ -1,12 +1,15 @@
 var curr_id;
 
 function getAuditoriums(startDate, endDate) {
-    var audDate = startDate + "," + endDate;
+    var s_date = JSON.stringify(startDate);
+    var e_date = JSON.stringify(endDate);
+    var audDate = s_date + "," + e_date;
     var outputData;
+    console.log('pass-date', audDate);
 
     $.ajax({
         type: 'GET',
-        url: '/getOccupiedAuditoriums/' + audDate,
+        url: '/getOccupiedAuditoriums/' + s_date + "," + e_date,
         success: function (result) {
             console.log('aud_reuslt', result);
             outputData = result;
@@ -18,8 +21,6 @@ function getAuditoriums(startDate, endDate) {
 
 function updateElement(event) {
     var auditoriumName;
-    console.log('event-start-date', event.start._d);
-    console.log('event-end-date', event.end._d);
     if (event.title.indexOf('Sala') !== -1) {
         auditoriumName = event.title.split(": ")[1];
     }
@@ -198,6 +199,8 @@ $(function () { // document ready
             $('#save_btn').attr("disabled", true);
             $('#fullCalModal').modal();
             $('#saveBtn').on('click', function () {
+                console.log('event-start-date', calEvent.start._d);
+                console.log('event-end-date', calEvent.end._d);
                 saveAuditorium(calEvent, getAuditoriums(calEvent.start._d, calEvent.end._d));
                 $(this).off("click");
             })
