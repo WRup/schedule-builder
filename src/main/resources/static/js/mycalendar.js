@@ -70,6 +70,7 @@ $(function () { // document ready
     });
 
     $('#calendar').fullCalendar({
+        schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         defaultView: 'agendaDay',
         themeSystem: 'jquery-ui',
         minTime: "07:00:00",
@@ -195,6 +196,7 @@ $(function () { // document ready
             $('#fullCalModal').modal();
             $('#saveBtn').on('click', function () {
                 saveAuditorium(calEvent, getAuditoriums(calEvent.start._d, calEvent.end._d));
+                $(this).off("click");
             })
         }
     });

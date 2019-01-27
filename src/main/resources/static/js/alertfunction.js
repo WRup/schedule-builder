@@ -36,7 +36,6 @@ function saveAuditorium(event, curr_id) {
         event.title = event.title + 'Sala: ' + document.getElementById(prevId).textContent;
     }
     $('#calendar').fullCalendar('updateEvent', event);
-    //event.id = curr_id;
     console.log('updateEvent', event);
     updateElement(event);
 }
