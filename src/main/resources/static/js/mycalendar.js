@@ -138,7 +138,7 @@ $(function () { // document ready
         },
 
         eventDrop: function (event, element) { // called when an event (already on the calendar) is moved
-            console.log('event-drop', event)
+            console.log('event-drop', event);
             updateElement(event);
         },
 
@@ -153,16 +153,15 @@ $(function () { // document ready
                     event.title = event.title.split(": ")[1];
                 }
                 updateElement(event);
-                var el = $("<tr id='external-events-listing'>").appendTo('#tableBody').html(event.title);
-                var el2 = $("<td class='fc-event' style='background-color: orange'>").appendTo()
-                el.setAttribute("id", event.id);
-                el.draggable({
+                var $el = $("<tr id='external-events-listing'>").appendTo('#tableBody')
+                var el2 = $("<td class='fc-event' style='background-color: orange'>").attr('id', event.id).appendTo($el).html(event.title);
+                el2.draggable({
                     zIndex: 999,
                     revert: true,
                     revertDuration: 0
                 });
-                el.data('event', {title: event.title, id: event.id, stick: true});
-                console.log('html-even', el);
+                el2.data('event', {title: event.title, id: event.id, stick: true});
+                console.log('html-even', el2);
                 console.log('event-title', event.title);
 
             }
