@@ -12,11 +12,9 @@ function getAuditoriums(startDate, endDate) {
         url: '/getOccupiedAuditoriums/' + s_date + "," + e_date,
         success: function (result) {
             console.log('aud_reuslt', result);
-            outputData = result;
+            disableAuditoriums(result)
         }
     });
-
-    return outputData;
 }
 
 function updateElement(event) {
@@ -193,7 +191,7 @@ $(function () { // document ready
 
         },
         eventClick: function (calEvent, jsEvent, view) {
-
+            getAuditoriums(calEvent.start._d, calEvent.end._d);
             $('#modalTitle').html(calEvent.title);
             $('#eventUrl').attr('href', calEvent.url);
             $('#save_btn').attr("disabled", true);
@@ -201,7 +199,7 @@ $(function () { // document ready
             $('#saveBtn').on('click', function () {
                 console.log('event-start-date', calEvent.start._d);
                 console.log('event-end-date', calEvent.end._d);
-                saveAuditorium(calEvent, getAuditoriums(calEvent.start._d, calEvent.end._d));
+                saveAuditorium(calEvent);
                 $(this).off("click");
             })
         }

@@ -55,9 +55,6 @@ public class AuditoriumServiceImpl implements AuditoriumService {
         Date startDate = dateConverter.convertDate(date.split(",")[0]);
         Date endDate = dateConverter.convertDate(date.split(",")[1]);
 
-        System.out.println(startDate);
-        System.out.println(endDate);
-
         return auditoriumRepository.findOccupiedAuditoriums(startDate, endDate);
     }
 }
