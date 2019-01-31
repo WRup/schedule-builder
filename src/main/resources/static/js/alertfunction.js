@@ -7,13 +7,11 @@ $(document).ready(function () {
 
 });
 
-function resetAuditoriums() {
-    $('#dropdown-menu a').removeClass();
-    $('#dropdown-menu a').addClass('dropdown-item');
-    $('#dropdown-menu a').css("color", "#000000");
-}
-
 function disableAuditoriums(aud_list) {
+    $('.dropdown-menu > li > a').removeClass();
+    $('.dropdown-menu > li > a').addClass('dropdown-item');
+    $('.dropdown-menu > li > a').css("color", "#000000");
+
     if (aud_list.length !== 0) {
         for (var id = 0, l = aud_list.length; id < l; id++) {
             var aud_id = aud_list[id].toString();
@@ -43,7 +41,6 @@ function saveAuditorium(event) {
     $('#calendar').fullCalendar('updateEvent', event);
     console.log('updateEvent', event);
     updateElement(event);
-    resetAuditoriums()
 }
 
 

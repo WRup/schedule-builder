@@ -81,6 +81,8 @@ $(function () { // document ready
         forceEventDuration: true,
         dragRevertDuration: 0,
         aspectRatio: 1.85,
+        //slotDuration: '00:15:00',
+        //slotLabelInterval: 15,
         slotLabelFormat: "HH:mm",
         handleWindowResize: true,
         droppable: true,
@@ -127,6 +129,7 @@ $(function () { // document ready
         ],
         timeFormat: 'HH:mm',
 
+
         drop: function (date, jsEvent, ui, resourceId) {
             console.log('drop', date.format(), resourceId);
             curr_id = this.id;
@@ -153,7 +156,7 @@ $(function () { // document ready
                 event.end._d = null;
                 event.resourceId = null;
                 if (event.title.indexOf('Sala') !== -1) {
-                    event.title = event.title.split(": ")[1];
+                    event.title = event.title.split("Sala")[0];
                 }
                 updateElement(event);
                 var $el = $("<tr id='external-events-listing'>").appendTo('#tableBody')

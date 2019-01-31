@@ -14,6 +14,6 @@ public interface AuditoriumRepository extends JpaRepository<Auditorium, Long> {
     @Query("select aud from Auditorium aud where aud.name = :name")
     Auditorium findByName(@Param("name") String name);
 
-    @Query("select aud.id from Auditorium aud inner join aud.lectures l where (l.startDate < :startDate and :startDate < l.endDate) or (l.startDate < :endDate  and :endDate < l.endDate)")
+    @Query("select aud.id from Auditorium aud inner join aud.lectures l where (l.startDate <= :startDate and :startDate <= l.endDate) or (l.startDate <= :endDate  and :endDate <= l.endDate)")
     List<Long> findOccupiedAuditoriums(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }
