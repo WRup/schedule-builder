@@ -2,18 +2,19 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset='utf-8'/>
-    <link href='css/fullcalendar.min.css' rel='stylesheet'/>
-    <link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print'/>
-    <link href='css/scheduler.min.css' rel='stylesheet'/>
+    <link href='css/fullcalendar/fullcalendar.min.css' rel='stylesheet'/>
+    <link href='css/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print'/>
+    <link href='css/fullcalendar/scheduler.min.css' rel='stylesheet'/>
     <link href="css/mystyles.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="css/tablestyles.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css" rel="stylesheet"/>
-    <script src="js/moment.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src='js/fullcalendar.min.js'></script>
-    <script src='js/scheduler.min.js'></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/fullcalendar/moment.min.js"></script>
+    <script src="js/fullcalendar/jquery.min.js"></script>
+    <script src="js/fullcalendar/jquery-ui.min.js"></script>
+    <script src='js/fullcalendar/fullcalendar.min.js'></script>
+    <script src='js/fullcalendar/scheduler.min.js'></script>
     <script src="js/mycalendar.js"></script>
     <script src="js/alertfunction.js"></script>
 </head>
@@ -46,30 +47,6 @@
         </table>
 
     </div>
-
-    <!--<div th:each="year:${years}" id='external-events' class="drag-events">
-        <div id='external-events-listing'>
-            <h4 th:utext="'Year: ' + ${year.name} + '<br/>'
-         + 'Term: ' + ${year.term} + '<br/>'
-         + 'Students: ' + ${year.students}">Draggable Events</h4>
-            <form th:each="lecture:${lectures}">
-                <div th:utext="${lecture.workerInSubject.subject.name} + '<br/>'
-            + ${lecture.workerInSubject.subject.type} + '<br/>'
-            + ${lecture.workerInSubject.worker.title} + '<br/>'
-            + ${lecture.workerInSubject.worker.name} + '<br/>'
-            + ${lecture.workerInSubject.worker.surname} +'<br/>'" class='fc-event' th:id="'lec_'+ ${lecture.id}"
-                     style="background-color: orange;">My
-                    Event
-                    1
-                </div>
-            </form>
-        </div>
-        <p>
-            <input type='checkbox' id='drop-remove' checked="checked"/>
-            <label for='drop-remove'>remove after drop</label>
-        </p>
-
-    </div>-->
 
     <div id='calendar' style="width: 88%"></div>
 

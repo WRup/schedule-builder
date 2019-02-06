@@ -3,7 +3,6 @@ package com.builder.schedule.demo.controllers;
 
 import com.builder.schedule.demo.excel.DataLoaderService;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,16 +18,20 @@ import java.io.InputStream;
 @Controller
 public class DataLoaderController {
 
-    @Autowired
-    private DataLoaderService dataLoaderService;
+    private final DataLoaderService dataLoaderService;
 
-    @GetMapping("")
+    public DataLoaderController(DataLoaderService dataLoaderService) {
+        this.dataLoaderService = dataLoaderService;
+    }
+
+    @GetMapping("/upload")
     public String index() {
-        return "loader/excel";
+        return "loader/uploadFile";
     }
 
     @PostMapping("/uploadExcelFile")
     public String uploadFile(Model model, MultipartFile file) throws IOException, InvalidFormatException {
+        String message;
         InputStream in = file.getInputStream();
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
@@ -40,11 +43,12 @@ public class DataLoaderController {
             }
             f.flush();
         } catch (Exception e) {
-            System.out.print("File cannot be loaded.");
+            message = "File cannot be loaded.";
+            model.addAttribute("message", message);
+            return "loader/uploadFile";
         }
-        String message = dataLoaderService.dataLoad(fileLocation);
-        System.out.println(message);
+        message = dataLoaderService.dataLoad(fileLocation);
         model.addAttribute("message", message);
-        return "loader/excel";
+        return "loader/uploadFile";
     }
 }

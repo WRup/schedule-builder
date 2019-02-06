@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<script src="js/notifyconfig.js"></script>
+<body>
+<h1>Load File</h1>
+<div class="container">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form method="post" action="/uploadExcelFile" enctype="multipart/form-data">
+            <input type="file" id="files" name="files" multiple="multiple"/>
+            <p style="text-align: right; margin-top: 20px;">
+                <input id="upload-button" type="submit" value="Upload Files" class="btn btn-lg btn-primary"
+                       th:data1="${message}"
+                       onclick="showToast(this.getAttribute('data1'))"/>
+            </p>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+<form method="GET" action="/scheduler">
+    <input type="submit" value="Display file content"/>
+
+    <br/>
+    <br/>
+
+    <table class="table table-striped">
+        <tbody>
+        <tr th:text="${data}">
+        </tr>
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

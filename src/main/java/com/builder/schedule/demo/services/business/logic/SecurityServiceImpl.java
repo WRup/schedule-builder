@@ -1,5 +1,6 @@
 package com.builder.schedule.demo.services.business.logic;
 
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,17 +12,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
+@Setter
 public class SecurityServiceImpl implements SecurityService, AuthenticationManager {
 
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
     private UserDetailsServiceImpl userDetailsService;
     private AuthenticationManager authenticationManager;
-
-    public SecurityServiceImpl(UserDetailsServiceImpl userDetailsService, AuthenticationManager authenticationManager) {
-        this.userDetailsService = userDetailsService;
-        this.authenticationManager = authenticationManager;
-    }
 
     @Override
     public String findLoggedInUsername() {

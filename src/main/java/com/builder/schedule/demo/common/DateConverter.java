@@ -11,7 +11,6 @@ import java.util.Date;
 @Data
 public class DateConverter {
 
-
     public Date convertDate(String date) throws ParseException {
         date = date.replaceAll("^\"|\"$", "");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSX");
