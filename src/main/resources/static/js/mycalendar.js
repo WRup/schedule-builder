@@ -213,6 +213,7 @@ $(function () { // document ready
             $('#modalTitle').html(calEvent.title);
             $('#eventUrl').attr('href', calEvent.url);
             $('#save_btn').attr("disabled", true);
+            $('#message-text').text("asdsajldsa");
             $('#fullCalModal').modal();
             $('#saveBtn').on('click', function () {
                 console.log('event-start-date', calEvent.start._d);

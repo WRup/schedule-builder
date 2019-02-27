@@ -95,6 +95,13 @@
                             </div>
                         </div>
                     </div>
+                    <form>
+                        <div class="form-group">
+                            <label class="col-form-label" for="message-text">Note:</label>
+                            <textarea class="form-control" id="message-text" readonly
+                                      style="resize: vertical"></textarea>
+                        </div>
+                    </form>
                     <div class="alert alert-success" id="success-alert">
                         <button class="close" data-dismiss="modal" type="button">x</button>
                     </div>
@@ -122,7 +129,7 @@
                     + worker_title + '<br>'
                     + worker_name + '<br>'
                     + worker_surname + '<br>';
-                if (auditorium){
+                if (auditorium) {
                     title += 'Sala: ' + auditorium;
                 }
 
