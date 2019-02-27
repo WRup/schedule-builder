@@ -1,4 +1,5 @@
 var curr_id;
+var id_counter = 0;
 
 function get_calendar_height() {
     return $(window).height() - 30;
@@ -141,6 +142,7 @@ $(function () { // document ready
         drop: function (date, jsEvent, ui, resourceId) {
             console.log('drop', date.format(), resourceId);
             curr_id = this.id;
+            id_counter++;
             //$(this).remove();
         },
         eventReceive: function (event) { // called when a proper external event is dropped
