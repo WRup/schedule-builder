@@ -32,6 +32,8 @@ public class Lecture {
     private Date startDate;
     @Column(name = "end_date")
     private Date endDate;
+    @Column(name = "note")
+    private String note;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "year_group_id")
     private Group group;

@@ -37,20 +37,22 @@ function saveAuditorium(event) {
     } else {
         event.title = event.title + 'Sala: ' + document.getElementById(id).textContent;
     }
+    event.description = $('#message-text').val();
     $('#calendar').fullCalendar('updateEvent', event);
     console.log('updateEvent', event);
     updateElement(event);
 }
 
 
-function renderLectureEvent(lecture_title, lecture_start_date, lecture_end_date, group_id, lecture_id, color) {
+function renderLectureEvent(lecture_title, lecture_start_date, lecture_end_date, group_id, lecture_id, note, color) {
     var event = {
         title: lecture_title,
         start: moment(lecture_start_date),
         end: moment(lecture_end_date),
         resourceId: group_id,
         id: lecture_id,
-        color: color
+        color: color,
+        description: note
     };
     $('#calendar').fullCalendar('renderEvent', event, true);
     console.log("renderedEvent", event);

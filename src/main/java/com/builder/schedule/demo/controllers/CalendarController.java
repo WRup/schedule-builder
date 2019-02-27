@@ -21,6 +21,11 @@ public class CalendarController {
         this.buildingService = buildingService;
     }
 
+    @GetMapping({"/", "/login"})
+    public String login() {
+        return "calendar/login";
+    }
+
     @GetMapping("/scheduler")
     public String index(Model model) {
         model.addAttribute("lectures_event", lectureService.findLecturesByStartDateIsNotNull());
@@ -29,7 +34,7 @@ public class CalendarController {
         model.addAttribute("lectures_external", lectureService.findLecturesByStartDateIsNull());
         return "calendar/schedulerAdmin";
     }
-    
+
     @GetMapping("/schedulerRead")
     public String renderReadScheduler(Model model) {
         model.addAttribute("lectures_event", lectureService.findLecturesByStartDateIsNotNull());

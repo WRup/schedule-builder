@@ -98,7 +98,7 @@
                     <form>
                         <div class="form-group">
                             <label class="col-form-label" for="message-text">Note:</label>
-                            <textarea class="form-control" id="message-text" readonly
+                            <textarea class="form-control" id="message-text"
                                       style="resize: vertical"></textarea>
                         </div>
                     </form>
@@ -137,6 +137,7 @@
                 var start_date = /*[[${lectures2.startDate}]]*/ null;
                 var end_date = /*[[${lectures2. startDate}]]*/ null;
                 var group_id = /*[[${lectures2.group.id}]]*/ null;
+                var note = /*[[${lectures2.note}]]*/ null;
                 console.log('title', title);
                 var color;
                 switch (type) {
@@ -150,7 +151,7 @@
                         color = 'green';
                         break;
                 }
-                renderLectureEvent(title, start_date, end_date, group_id, lecture_id, color);
+                renderLectureEvent(title, start_date, end_date, group_id, lecture_id, note, color);
                 /*]]>*/
             });
         </script>

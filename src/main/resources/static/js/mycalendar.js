@@ -42,7 +42,8 @@ function updateElement(event) {
         startDate: event.start._d,
         endDate: event.end._d,
         groupId: event.resourceId,
-        auditoriumName: auditoriumName
+        auditoriumName: auditoriumName,
+        note: event.description
     };
     var json = JSON.stringify(lectureDto);
     $.ajax({
@@ -209,11 +210,12 @@ $(function () { // document ready
 
         },
         eventClick: function (calEvent, jsEvent, view) {
+            console.log(calEvent.description);
             getAuditoriums(calEvent.start._d, calEvent.end._d);
             $('#modalTitle').html(calEvent.title);
             $('#eventUrl').attr('href', calEvent.url);
             $('#save_btn').attr("disabled", true);
-            $('#message-text').text("asdsajldsa");
+            $('#message-text').val(calEvent.description);
             $('#fullCalModal').modal();
             $('#saveBtn').on('click', function () {
                 console.log('event-start-date', calEvent.start._d);

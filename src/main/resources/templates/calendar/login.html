@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link href="css/loginform.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="notifyconfig.js"></script>
+<body>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <h1>University Scheduler</h1>
+        </div>
+
+
+        <!-- Login Form -->
+        <form>
+            <input class="fadeIn second" id="test" type="submit" value="Schow Scheduler">
+            <input class="fadeIn second" id="login" name="login" placeholder="login" type="text">
+            <input class="fadeIn third" id="password" name="login" placeholder="password" type="text">
+            <input class="fadeIn fourth" type="submit" value="Log In">
+        </form>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#" id="forgot-button">Forgot
+                Password?</a>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Central Modal Medium Info -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="centralModalInfo" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">Forgot password?</p>
+
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <p>Please contact with Admin Administator (admin@administrator.com) to recover your password. Thank
+                        you.</p>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Central Modal Medium Info-->
+</body>

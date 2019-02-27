@@ -9,7 +9,6 @@
     <link href="css/tablestyles.css" rel="stylesheet"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css" rel="stylesheet"/>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/fullcalendar/moment.min.js"></script>
     <script src="js/fullcalendar/jquery.min.js"></script>
     <script src="js/fullcalendar/jquery-ui.min.js"></script>
@@ -17,6 +16,7 @@
     <script src='js/fullcalendar/scheduler.min.js'></script>
     <script src="js/mycalendar.js"></script>
     <script src="js/alertfunction.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body style="overflow:hidden">
 <div id='wrap' style="width: 100%">
@@ -33,25 +33,13 @@
                     <h4 class="modal-title" id="modalTitle"></h4>
                 </div>
                 <div class="modal-body" id="modalBody">
-                    <div class="btn-group">
-                        <div class="btn-group" th:each="building:${buildings}">
-                            <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle"
-                                    data-toggle="dropdown" th:utext="${building.name}" type="button">
-                                Sony <span class="caret"></span></button>
-                            <div class="dropdown-menu">
-                                <li th:each="auditorium:${building.auditoriums}">
-                                    <a class="dropdown-item" href="#"
-                                       onclick="showAlert(this.getAttribute('data1'), this.getAttribute('id'));"
-                                       th:data1="${auditorium.name}"
-                                       th:id="'aud_'+${auditorium.id}"
-                                       th:utext="${auditorium.name}">Tablet</a>
-                                </li>
-                            </div>
+                    <form>
+                        <div class="form-group">
+                            <label class="col-form-label" for="message-text">Note:</label>
+                            <textarea class="form-control" id="message-text"
+                                      style="resize: vertical"></textarea>
                         </div>
-                    </div>
-                    <div class="alert alert-success" id="success-alert">
-                        <button class="close" data-dismiss="modal" type="button">x</button>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal" id="saveBtn" type="button">Save
@@ -76,7 +64,7 @@
                     + worker_title + '<br>'
                     + worker_name + '<br>'
                     + worker_surname + '<br>';
-                if (auditorium){
+                if (auditorium) {
                     title += 'Sala: ' + auditorium;
                 }
 
@@ -84,6 +72,7 @@
                 var start_date = /*[[${lectures2.startDate}]]*/ null;
                 var end_date = /*[[${lectures2. startDate}]]*/ null;
                 var group_id = /*[[${lectures2.group.id}]]*/ null;
+                var note = /*[[${lectures2.note}]]*/ null;
                 console.log('title', title);
                 var color;
                 switch (type) {
@@ -97,7 +86,7 @@
                         color = 'green';
                         break;
                 }
-                renderLectureEvent(title, start_date, end_date, group_id, lecture_id, color);
+                renderLectureEvent(title, start_date, end_date, group_id, lecture_id, note, color);
                 /*]]>*/
             });
         </script>

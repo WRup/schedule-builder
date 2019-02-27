@@ -20,4 +20,6 @@ public class LectureDto {
 
     private Long groupId;
     private String auditoriumName;
+
+    private String note;
 }
