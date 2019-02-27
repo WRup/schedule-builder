@@ -12,10 +12,10 @@
 <div class="container">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <form method="post" action="/uploadExcelFile" enctype="multipart/form-data">
-            <input type="file" id="files" name="files" multiple="multiple"/>
+        <form action="/uploadExcelFile" enctype="multipart/form-data" method="post">
+            <input id="file" multiple="multiple" name="file" type="file"/>
             <p style="text-align: right; margin-top: 20px;">
-                <input id="upload-button" type="submit" value="Upload Files" class="btn btn-lg btn-primary"/>
+                <input class="btn btn-lg btn-primary" id="upload-button" type="submit" value="Upload Files"/>
             </p>
         </form>
     </div>
@@ -23,7 +23,7 @@
 </div>
 
 
-<form method="GET" action="/scheduler">
+<form action="/scheduler" method="GET">
     <input type="submit" value="Display file content"/>
 
     <br/>

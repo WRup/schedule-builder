@@ -1,4 +1,4 @@
-package com.builder.schedule.demo.services.business.logic;
+/*package com.builder.schedule.demo.services.business.logic;
 
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -49,3 +49,4 @@ public class SecurityServiceImpl implements SecurityService, AuthenticationManag
         return null;
     }
 }
+*/

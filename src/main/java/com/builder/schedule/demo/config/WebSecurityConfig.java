@@ -1,4 +1,4 @@
-package com.builder.schedule.demo.config;
+/*package com.builder.schedule.demo.config;
 
 
 import com.builder.schedule.demo.services.business.logic.UserDetailsServiceImpl;
@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
+       /* httpSecurity.authorizeRequests()
                     .antMatchers("/resources/**", "/registration")
                     .permitAll()
                     .anyRequest()
@@ -34,7 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .and()
                     .logout()
-                    .permitAll();
+                    .permitAll();*/
+/*
 
     }
 
@@ -48,3 +49,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 }
+*/

@@ -1,5 +1,13 @@
 var curr_id;
 
+function get_calendar_height() {
+    return $(window).height() - 30;
+}
+
+$(window).resize(function () {
+    $('#calendar').fullCalendar('option', 'height', get_calendar_height());
+});
+
 function getAuditoriums(startDate, endDate) {
     var s_date = JSON.stringify(startDate);
     var e_date = JSON.stringify(endDate);
@@ -21,8 +29,7 @@ function updateElement(event) {
     var auditoriumName;
     if (event.title.indexOf('Sala') !== -1) {
         auditoriumName = event.title.split(": ")[1];
-    }
-    else {
+    } else {
         auditoriumName = ""
     }
     var lectureDto = {
@@ -77,6 +84,7 @@ $(function () { // document ready
         minTime: "07:00:00",
         maxTime: "21:00:00",
         timezone: 'local',
+        height: get_calendar_height,
         defaultTimedEventDuration: moment.duration("01:30:00"),
         forceEventDuration: true,
         dragRevertDuration: 0,
@@ -120,12 +128,12 @@ $(function () { // document ready
         allDaySlot: false,
 
         resources: [
-            {id: '1', title: 'GR 1', eventColor: 'orange'},
-            {id: '2', title: 'GR 2', eventColor: 'orange'},
-            {id: '3', title: 'GR 3', eventColor: 'orange'},
-            {id: '4', title: 'GR 4', eventColor: 'orange'},
-            {id: '5', title: 'GR 5', eventColor: 'orange'},
-            {id: '6', title: 'GR 6', eventColor: 'orange'}
+            {id: '1', title: 'GR 1'},
+            {id: '2', title: 'GR 2'},
+            {id: '3', title: 'GR 3'},
+            {id: '4', title: 'GR 4'},
+            {id: '5', title: 'GR 5'},
+            {id: '6', title: 'GR 6'}
         ],
         timeFormat: 'HH:mm',
 
@@ -133,7 +141,7 @@ $(function () { // document ready
         drop: function (date, jsEvent, ui, resourceId) {
             console.log('drop', date.format(), resourceId);
             curr_id = this.id;
-            $(this).remove();
+            //$(this).remove();
         },
         eventReceive: function (event) { // called when a proper external event is dropped
             event.id = curr_id;
@@ -159,8 +167,13 @@ $(function () { // document ready
                     event.title = event.title.split("Sala")[0];
                 }
                 updateElement(event);
-                var $el = $("<tr id='external-events-listing'>").appendTo('#tableBody')
-                var el2 = $("<td class='fc-event' style='background-color: orange'>").attr('id', event.id).appendTo($el).html(event.title);
+                var $el = $("<tr id='external-events-listing'>").appendTo('#tableBody');
+                var el2 = $("<td class='fc-event' style='background-color: orange'>").attr({
+                    'id': event.id,
+                    'data-color': event.color
+                });
+                el2.css('background-color', event.color);
+                el2.appendTo($el).html(event.title);
                 el2.draggable({
                     zIndex: 999,
                     revert: true,

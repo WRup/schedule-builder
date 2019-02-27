@@ -3,9 +3,9 @@
 <head>
     <meta charset='utf-8'/>
     <link href='css/fullcalendar/fullcalendar.min.css' rel='stylesheet'/>
-    <link href='css/fullcalendar/fullcalendar.print.min.css' rel='stylesheet' media='print'/>
+    <link href='css/fullcalendar/fullcalendar.print.min.css' media='print' rel='stylesheet'/>
     <link href='css/fullcalendar/scheduler.min.css' rel='stylesheet'/>
-    <link href="css/mystyles.css" rel="stylesheet"/>
+    <link href="css/calendarstyles.css" rel="stylesheet"/>
     <link href="css/tablestyles.css" rel="stylesheet"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css" rel="stylesheet"/>
@@ -19,10 +19,11 @@
     <script src="js/alertfunction.js"></script>
 </head>
 <body>
-<div id='wrap' style="width: 87%">
+<div id='wrap' style="width: 100%">
 
-    <div th:each="year:${years}" id='external-events' class="drag-events"
-         style="width: 10%; background-color: rgba(255,255,255, 0.9)">
+    <div class="drag-events" id='external-events'
+         style="width: 13%; float:left;  margin-right: 10px; margin-left: 15px;background-color: rgba(255,255,255, 0.9)"
+         th:each="year:${years}">
         <table class="cinereousTable">
             <thead>
             <tr th:each="year:${years}">
@@ -33,14 +34,33 @@
             </tr>
             </thead>
             <tbody id="tableBody">
-            <tr th:each="lecture:${lectures_external}" id='external-events-listing'>
-                <td th:utext="${lecture.workerInSubject.subject.name} + '<br/>'
+            <tr id='external-events-listing' th:each="lecture:${lectures_external}">
+                <div th:switch="${lecture.workerInSubject.subject.type}">
+                    <td class='fc-event' data-color="orange" style="background-color: orange;" th:case="'L'"
+                        th:id="'lec_'+ ${lecture.id}"
+                        th:utext="${lecture.workerInSubject.subject.name} + '<br/>'
             + ${lecture.workerInSubject.subject.type} + '<br/>'
             + ${lecture.workerInSubject.worker.title} + '<br/>'
             + ${lecture.workerInSubject.worker.name} + '<br/>'
-            + ${lecture.workerInSubject.worker.surname} +'<br/>'" class='fc-event' th:id="'lec_'+ ${lecture.id}"
-                    style="background-color: orange;">cell1_1
-                </td>
+            + ${lecture.workerInSubject.worker.surname} +'<br/>'">cell1_1
+                    </td>
+                    <td class='fc-event' data-color="blue" style="background-color: blue;" th:case="'C'"
+                        th:id="'lec_'+ ${lecture.id}"
+                        th:utext="${lecture.workerInSubject.subject.name} + '<br/>'
+            + ${lecture.workerInSubject.subject.type} + '<br/>'
+            + ${lecture.workerInSubject.worker.title} + '<br/>'
+            + ${lecture.workerInSubject.worker.name} + '<br/>'
+            + ${lecture.workerInSubject.worker.surname} +'<br/>'">cell1_1
+                    </td>
+                    <td class='fc-event' data-color="green" style="background-color: green;" th:case="'W'"
+                        th:id="'lec_'+ ${lecture.id}"
+                        th:utext="${lecture.workerInSubject.subject.name} + '<br/>'
+            + ${lecture.workerInSubject.subject.type} + '<br/>'
+            + ${lecture.workerInSubject.worker.title} + '<br/>'
+            + ${lecture.workerInSubject.worker.name} + '<br/>'
+            + ${lecture.workerInSubject.worker.surname} +'<br/>'">cell1_1
+                    </td>
+                </div>
             </tr>
             </tbody>
             </tr>
@@ -48,38 +68,39 @@
 
     </div>
 
-    <div id='calendar' style="width: 88%"></div>
+    <div id='calendar'></div>
 
-    <div id="fullCalModal" class="modal fade">
+    <div class="modal fade" id="fullCalModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span
+                    <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span> <span
                             class="sr-only">close</span></button>
-                    <h4 id="modalTitle" class="modal-title"></h4>
+                    <h4 class="modal-title" id="modalTitle"></h4>
                 </div>
-                <div id="modalBody" class="modal-body">
+                <div class="modal-body" id="modalBody">
                     <div class="btn-group">
                         <div class="btn-group" th:each="building:${buildings}">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" th:utext="${building.name}">
+                            <button aria-expanded="false" aria-haspopup="true" class="btn btn-primary dropdown-toggle"
+                                    data-toggle="dropdown" th:utext="${building.name}" type="button">
                                 Sony <span class="caret"></span></button>
                             <div class="dropdown-menu">
                                 <li th:each="auditorium:${building.auditoriums}">
-                                    <a class="dropdown-item" href="#" th:id="'aud_'+${auditorium.id}"
-                                       th:utext="${auditorium.name}"
+                                    <a class="dropdown-item" href="#"
+                                       onclick="showAlert(this.getAttribute('data1'), this.getAttribute('id'));"
                                        th:data1="${auditorium.name}"
-                                       onclick="showAlert(this.getAttribute('data1'), this.getAttribute('id'));">Tablet</a>
+                                       th:id="'aud_'+${auditorium.id}"
+                                       th:utext="${auditorium.name}">Tablet</a>
                                 </li>
                             </div>
                         </div>
                     </div>
                     <div class="alert alert-success" id="success-alert">
-                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <button class="close" data-dismiss="modal" type="button">x</button>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="saveBtn" type="button" class="btn btn-default" data-dismiss="modal">Save
+                    <button class="btn btn-default" data-dismiss="modal" id="saveBtn" type="button">Save
                     </button>
                 </div>
             </div>
@@ -89,8 +110,6 @@
     <div th:each="lectures2:${lectures_event}">
         <script th:inline="javascript">
             $(document).ready(function () {
-
-
                 /*<![CDATA[*/
                 var name = /*[[${lectures2.workerInSubject.subject.name}]]*/ null;
                 var type = /*[[${lectures2.workerInSubject.subject.type}]]*/ null;
@@ -107,12 +126,21 @@
                 var end_date = /*[[${lectures2. startDate}]]*/ null;
                 var group_id = /*[[${lectures2.group.id}]]*/ null;
                 console.log('title', title);
-
-                renderLectureEvent(title, start_date, end_date, group_id, lecture_id);
-
+                var color;
+                switch (type) {
+                    case "L":
+                        color = 'orange';
+                        break;
+                    case "C":
+                        color = 'blue';
+                        break;
+                    case "W":
+                        color = 'green';
+                        break;
+                }
+                renderLectureEvent(title, start_date, end_date, group_id, lecture_id, color);
                 /*]]>*/
             });
-
         </script>
     </div>
 </div>

@@ -1,4 +1,4 @@
-package com.builder.schedule.demo.controllers;
+/*package com.builder.schedule.demo.controllers;
 
 import com.builder.schedule.demo.model.User;
 import com.builder.schedule.demo.services.business.logic.SecurityService;
@@ -61,3 +61,4 @@ public class UserController {
         return "welcome";
     }
 }
+*/

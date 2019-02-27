@@ -34,8 +34,7 @@ function showAlert(auditorium, currId) {
 function saveAuditorium(event) {
     if (event.title.indexOf('Sala') !== -1) {
         event.title = event.title.split("Sala")[0] + 'Sala: ' + document.getElementById(id).textContent;
-    }
-    else {
+    } else {
         event.title = event.title + 'Sala: ' + document.getElementById(id).textContent;
     }
     $('#calendar').fullCalendar('updateEvent', event);
@@ -44,13 +43,14 @@ function saveAuditorium(event) {
 }
 
 
-function renderLectureEvent(lecture_title, lecture_start_date, lecture_end_date, group_id, lecture_id) {
+function renderLectureEvent(lecture_title, lecture_start_date, lecture_end_date, group_id, lecture_id, color) {
     var event = {
         title: lecture_title,
         start: moment(lecture_start_date),
         end: moment(lecture_end_date),
         resourceId: group_id,
-        id: lecture_id
+        id: lecture_id,
+        color: color
     };
     $('#calendar').fullCalendar('renderEvent', event, true);
     console.log("renderedEvent", event);

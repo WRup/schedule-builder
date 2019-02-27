@@ -7,8 +7,10 @@ body {
 
 #calendar {
     float: right;
-    width: 900px;
     margin-top: 15px;
+    width: 83%;
+    margin-right: 25px;
+    margin-bottom: 25px;
 }
 
 #wrap {

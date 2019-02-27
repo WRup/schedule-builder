@@ -1,8 +1,10 @@
-package com.builder.schedule.demo.services.business.logic;
+/*package com.builder.schedule.demo.services.business.logic;
 
 import com.builder.schedule.demo.model.User;
 import com.builder.schedule.demo.model.repository.RoleRepository;
 import com.builder.schedule.demo.model.repository.UserRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,3 +35,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
 }
+*/

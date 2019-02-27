@@ -1,4 +1,4 @@
-package com.builder.schedule.demo.services.business.logic;
+/*package com.builder.schedule.demo.services.business.logic;
 
 import com.builder.schedule.demo.model.Role;
 import com.builder.schedule.demo.model.User;
@@ -40,3 +40,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                                                                       grantedAuthorities);
     }
 }
+*/

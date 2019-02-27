@@ -27,6 +27,15 @@ public class CalendarController {
         model.addAttribute("years", yearService.findAll());
         model.addAttribute("buildings", buildingService.findAll());
         model.addAttribute("lectures_external", lectureService.findLecturesByStartDateIsNull());
-        return "calendar/scheduler";
+        return "calendar/schedulerAdmin";
+    }
+    
+    @GetMapping("/schedulerRead")
+    public String renderReadScheduler(Model model) {
+        model.addAttribute("lectures_event", lectureService.findLecturesByStartDateIsNotNull());
+        model.addAttribute("years", yearService.findAll());
+        model.addAttribute("buildings", buildingService.findAll());
+        model.addAttribute("lectures_external", lectureService.findLecturesByStartDateIsNull());
+        return "calendar/schedulerRead";
     }
 }

@@ -1,4 +1,4 @@
-package com.builder.schedule.demo.services.validator;
+/*package com.builder.schedule.demo.services.validator;
 
 import com.builder.schedule.demo.model.User;
 import com.builder.schedule.demo.services.business.logic.UserService;
@@ -43,4 +43,4 @@ public class UserValidator implements Validator {
             errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
         }
     }
-}
+}*/
