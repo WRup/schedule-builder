@@ -21,10 +21,10 @@ public class CalendarController {
         this.buildingService = buildingService;
     }
 
-    @GetMapping({"/", "/login"})
+    /*@GetMapping({"/", "/login"})
     public String login() {
         return "calendar/login";
-    }
+    }*/
 
     @GetMapping("/scheduler")
     public String index(Model model) {

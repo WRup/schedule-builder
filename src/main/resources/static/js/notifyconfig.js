@@ -16,15 +16,12 @@ $(document).ready(function () {
         "hideEasing": "linear",
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
-    }
+    };
+    $('#centralModalInfo').modal();
 });
 
 $("#upload-button").click(function () {
 
     toastr["success"]('Hi! I am success message.');
 
-});
-
-$('#test').click(function () {
-    $('#centralModalInfo').modal('show');
 });

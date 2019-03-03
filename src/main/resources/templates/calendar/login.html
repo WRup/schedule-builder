@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
+<link href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" type="text/css"/>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <link href="css/loginform.css" rel="stylesheet"/>
+<script src="js/fullcalendar/moment.min.js"></script>
+<script src="js/fullcalendar/jquery.min.js"></script>
+<script src="js/fullcalendar/jquery-ui.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="notifyconfig.js"></script>
+<script src="js/notifyconfig.js"></script>
 <body>
 
 <div class="wrapper fadeInDown">
@@ -22,7 +25,7 @@
 
         <!-- Login Form -->
         <form>
-            <input class="fadeIn second" id="test" type="submit" value="Schow Scheduler">
+            <input class="fadeIn second" id="test" type="submit" value="Show Scheduler">
             <input class="fadeIn second" id="login" name="login" placeholder="login" type="text">
             <input class="fadeIn third" id="password" name="login" placeholder="password" type="text">
             <input class="fadeIn fourth" type="submit" value="Log In">
@@ -46,11 +49,11 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-                <p class="heading lead">Forgot password?</p>
-
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                     <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
+                <p class="heading lead">Forgot password?</p>
+
             </div>
 
             <!--Body-->

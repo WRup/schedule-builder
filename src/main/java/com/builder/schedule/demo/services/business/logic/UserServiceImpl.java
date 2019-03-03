@@ -1,13 +1,13 @@
-/*package com.builder.schedule.demo.services.business.logic;
+package com.builder.schedule.demo.services.business.logic;
 
+import com.builder.schedule.demo.model.Role;
 import com.builder.schedule.demo.model.User;
 import com.builder.schedule.demo.model.repository.RoleRepository;
 import com.builder.schedule.demo.model.repository.UserRepository;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 @Service
@@ -24,15 +24,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
-        userRepository.save(user);
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public void saveUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setActive(1);
+        Role userRole = roleRepository.findByRole("ADMIN");
+        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+        userRepository.save(user);
     }
 }
-*/

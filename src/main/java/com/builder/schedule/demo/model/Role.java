@@ -2,30 +2,28 @@ package com.builder.schedule.demo.model;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.Set;
 
-@Entity
-@Table(name = "role")
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "role_entity")
 public class Role {
-
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Long id;
-    private String name;
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "role_id")
+    private int id;
+    @Column(name = "role")
+    private String role;
 }
