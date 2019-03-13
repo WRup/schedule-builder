@@ -1,5 +1,7 @@
 var curr_id;
 var id_counter = 0;
+var curr_hours;
+var count_hours;
 
 function get_calendar_height() {
     return $(window).height() - 30;
@@ -141,13 +143,19 @@ $(function () { // document ready
 
 
         drop: function (date, jsEvent, ui, resourceId) {
-            console.log('drop', date.format(), resourceId);
-            curr_id = this.id;
+            console.log('drop', date.format(), resourceId, this);
+            curr_id = this.id + id_counter;
+            curr_hours = this.getAttribute("hours");
             id_counter++;
-            //$(this).remove();
+            curr_hours = parseInt(curr_hours, 10) - 1.5;
+            this.setAttribute("hours", curr_hours);
+            console.log('Curr hours', curr_hours);
+            if (curr_hours <= 0)
+                $(this).remove();
         },
         eventReceive: function (event) { // called when a proper external event is dropped
             event.id = curr_id;
+            event.hours = curr_hours;
             $('#calendar').fullCalendar('removeEvents', event._id);
             $('#calendar').fullCalendar('renderEvent', event, true);
             updateElement(event);

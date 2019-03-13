@@ -18,12 +18,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvPOIHelper {
+class CsvPOIHelper {
 
 
-    public List<ArrayList> readCsv(String filepath) {
+    List<ArrayList> readCsv(String filepath) {
         List<ArrayList> lists = new ArrayList<>();
         ArrayList<Subject> subjects = new ArrayList<>();
+
         ArrayList<Worker> workers = new ArrayList<>();
         ArrayList<Year> years = new ArrayList<>();
         ArrayList<Group> groups = new ArrayList<>();
@@ -65,6 +66,9 @@ public class CsvPOIHelper {
                     System.out.printf(csvRecord.get(2));
                     subject.setHours(csvRecord.get(3));
                     System.out.printf(csvRecord.get(3));
+                    //if(csvRecord.size() == 5)
+
+
                     subjects.add(subject);
                     groups = checkGroups(subject, groups, year);
                 } else if(csvRecord.getRecordNumber() >= 3) {
@@ -90,6 +94,8 @@ public class CsvPOIHelper {
             lectures.add(new Lecture(wis));
         }
 
+        setLectureHours(subjects, workerInSubjects);
+
         lists.add(subjects);
         lists.add(workers);
         lists.add(years);
@@ -99,6 +105,22 @@ public class CsvPOIHelper {
 
 
         return lists;
+    }
+
+    private void setLectureHours(ArrayList<Subject> subjects, ArrayList<WorkerInSubject> workerInSubjects) {
+
+        int maxGroups = 0;
+        for (Subject subject : subjects) {
+            if(Integer.valueOf(subject.getNumberOfGroups()) > maxGroups) {
+                maxGroups = Integer.valueOf(subject.getNumberOfGroups());
+            }
+        }
+
+        for (WorkerInSubject wis : workerInSubjects) {
+            if(wis.getSubject().getType().equals("W")) {
+                wis.setHours(String.valueOf(Integer.valueOf(wis.getHours()) * maxGroups));
+            }
+        }
     }
 
     private ArrayList<Group> checkGroups(Subject subject, ArrayList<Group> arrayList, Year year) {

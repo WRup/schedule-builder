@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset='utf-8'/>
+    <link href='css/fullcalendar/fullcalendar.min.css' rel='stylesheet'/>
+    <link href='css/fullcalendar/fullcalendar.print.min.css' media='print' rel='stylesheet'/>
+    <link href='css/fullcalendar/scheduler.min.css' rel='stylesheet'/>
+    <link href="css/calendarstyles.css" rel="stylesheet"/>
+    <link href="css/tablestyles.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css" rel="stylesheet"/>
+    <script src="js/fullcalendar/moment.min.js"></script>
+    <script src="js/fullcalendar/jquery.min.js"></script>
+    <script src="js/fullcalendar/jquery-ui.min.js"></script>
+    <script src='js/fullcalendar/fullcalendar.min.js'></script>
+    <script src='js/fullcalendar/scheduler.min.js'></script>
+    <script src="js/fullcalendar/readcalendar.js"></script>
+    <script src="js/alertfunction.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body style="overflow:hidden">
+<div id='wrap' style="width: 100%">
+
+    <div id='calendar'
+         style="margin-right: 25px; margin-left: 25px; width: 96%; height: 95%; overflow:hidden; position:absolute;"></div>
+
+    <div class="modal fade" id="fullCalModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span> <span
+                            class="sr-only">close</span></button>
+                    <h4 class="modal-title" id="modalTitle"></h4>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <form>
+                        <div class="form-group">
+                            <label class="col-form-label" for="message-text">Note:</label>
+                            <textarea class="form-control" id="message-text" readonly
+                                      style="resize: vertical"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style='clear:both'></div>
+    <div th:each="lectures2:${lectures_event}">
+        <script th:inline="javascript">
+            $(document).ready(function () {
+                /*<![CDATA[*/
+                var name = /*[[${lectures2.workerInSubject.subject.name}]]*/ null;
+                var type = /*[[${lectures2.workerInSubject.subject.type}]]*/ null;
+                var worker_title = /*[[${lectures2.workerInSubject.worker.title}]]*/ null;
+                var worker_name = /*[[${lectures2.workerInSubject.worker.name}]]*/ null;
+                var worker_surname = /*[[${lectures2.workerInSubject.worker.surname}]]*/ null;
+                var auditorium = /*[[${lectures2?.auditorium?.name}]]*/ null;
+                var title = name + "<br>"
+                    + type + '<br>'
+                    + worker_title + '<br>'
+                    + worker_name + '<br>'
+                    + worker_surname + '<br>';
+                if (auditorium) {
+                    title += 'Sala: ' + auditorium;
+                }
+
+                var lecture_id = "lec_" + /*[[${lectures2.id}]]*/ null;
+                var start_date = /*[[${lectures2.startDate}]]*/ null;
+                var end_date = /*[[${lectures2. startDate}]]*/ null;
+                var group_id = /*[[${lectures2.group.id}]]*/ null;
+                var note = /*[[${lectures2.note}]]*/ null;
+                console.log('title', title);
+                var color;
+                switch (type) {
+                    case "L":
+                        color = 'orange';
+                        break;
+                    case "C":
+                        color = 'blue';
+                        break;
+                    case "W":
+                        color = 'green';
+                        break;
+                }
+                renderLectureEvent(title, start_date, end_date, group_id, lecture_id, note, color);
+                /*]]>*/
+            });
+        </script>
+    </div>
+</body>
+</html>

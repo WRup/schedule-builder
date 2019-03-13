@@ -32,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        System.out.println(usersQuery);
         auth.
                     jdbcAuthentication()
             .usersByUsernameQuery(usersQuery)
@@ -54,10 +55,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .permitAll()
             .antMatchers("/login")
             .permitAll()
-            .antMatchers("/registration")
+            //.antMatchers("/common/**")
+            //.permitAll()
+            .antMatchers("/schedulerRead")
             .permitAll()
-            .antMatchers("/admin/**")
+            //.antMatchers("/admin/**")
+            .antMatchers("/schedulerAdmin")
             .hasAuthority("ADMIN")
+            .antMatchers("/upload")
+            .hasAuthority("ADMIN")
+            .antMatchers("/worker/**")
+            .hasAuthority("WORKER")
             .anyRequest()
             .authenticated()
             .and()
@@ -66,7 +74,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .formLogin()
             .loginPage("/login")
             .failureUrl("/login?error=true")
-            .defaultSuccessUrl("/admin/home")
+            .defaultSuccessUrl("/home")
             .usernameParameter("email")
             .passwordParameter("password")
             .and()
@@ -76,6 +84,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .exceptionHandling()
             .accessDeniedPage("/access-denied");
+
     }
 
 }

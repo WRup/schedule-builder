@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" type="text/css"/>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css" rel="stylesheet" type="text/css"/>
@@ -7,26 +7,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="notifyconfig.js"></script>
+<script src="js/notifyconfig.js"></script>
 <body>
 <h1 align="center">File Loader</h1>
 <div class="container">
-    <form class="md-form">
-        <form action="/uploadExcelFile" enctype="multipart/form-data" method="post">
-            <div class="file-field">
-                <div class="btn btn-primary btn-sm float-center">
-                    <input id="file" name="file" type="file">
-                </div>
+    <form action="/uploadExcelFile" enctype="multipart/form-data" method="post">
+        <div class="file-field">
+            <div class="btn btn-primary btn-sm float-center">
+                <input id="file" name="file" type="file">
             </div>
-            <form style="margin: 0 auto;">
-                <input class="fadeIn fourth" id="upload-button" type="submit" value="UPLOAD FILE"/>
-            </form>
-        </form>
+        </div>
+        <input class="fadeIn fourth" id="upload-button" type="submit" value="UPLOAD FILE"/>
     </form>
-    <form style="margin: 0 auto;">
-        <form action="/scheduler" method="GET">
-            <input class="fadeIn fourth" id="show-content-button" type="submit" value="SHOW SCHEDULE"/>
-        </form>
+    <form method="GET" th:action="@{/schedulerAdmin}">
+        <input class="fadeIn fourth" id="show-content-button" type="submit" value="SHOW SCHEDULE"/>
     </form>
 </div>
 </body>

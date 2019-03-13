@@ -121,6 +121,8 @@ public class ExcelPOIHelper {
             lectures.add(new Lecture(wis));
         }
 
+        setLectureHours(subjects, workerInSubjects);
+
         lists.add(subjects);
         lists.add(workers);
         lists.add(years);
@@ -130,6 +132,22 @@ public class ExcelPOIHelper {
 
 
         return lists;
+    }
+
+    private void setLectureHours(ArrayList<Subject> subjects, ArrayList<WorkerInSubject> workerInSubjects) {
+
+        int maxGroups = 0;
+        for (Subject subject : subjects) {
+            if(Integer.valueOf(subject.getNumberOfGroups()) > maxGroups) {
+                maxGroups = Integer.valueOf(subject.getNumberOfGroups());
+            }
+        }
+
+        for (WorkerInSubject wis : workerInSubjects) {
+            if(wis.getSubject().getType().equals("W")) {
+                wis.setHours(String.valueOf(Integer.valueOf(wis.getHours()) * maxGroups));
+            }
+        }
     }
 
     private ArrayList<Group> checkGroups(Subject subject, ArrayList<Group> arrayList, Year year) {

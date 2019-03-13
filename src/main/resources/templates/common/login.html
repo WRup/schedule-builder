@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <link href="https://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" type="text/css"/>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -12,22 +13,25 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="js/notifyconfig.js"></script>
 <body>
-
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        <!-- Tabs Titles -->
+
 
         <!-- Icon -->
         <div class="fadeIn first">
             <h1>University Scheduler</h1>
         </div>
-
+        <form method="get" th:action="@{/schedulerRead}">
+            <input class="fadeIn second" id="test" type="submit" value="Show Scheduler">
+        </form>
 
         <!-- Login Form -->
-        <form>
-            <input class="fadeIn second" id="test" type="submit" value="Show Scheduler">
-            <input class="fadeIn second" id="login" name="login" placeholder="login" type="text">
-            <input class="fadeIn third" id="password" name="login" placeholder="password" type="text">
+        <form method="POST" th:action="@{/login}">
+            <input class="fadeIn second" id="email" name="email" th:placeholder="login" type="text">
+            <input class="fadeIn third" id="password" name="password" th:placeholder="password" type="password">
+            <div align="center" th:if="${#httpServletRequest.getParameter('error') == 'badCredentialsException'}">
+                <p style="font-size: 20px; color: #FF1C19;">Email or Password invalid, please verify</p>
+            </div>
             <input class="fadeIn fourth" type="submit" value="Log In">
         </form>
 
@@ -36,7 +40,6 @@
             <a class="underlineHover" href="#" id="forgot-button">Forgot
                 Password?</a>
         </div>
-
     </div>
 </div>
 

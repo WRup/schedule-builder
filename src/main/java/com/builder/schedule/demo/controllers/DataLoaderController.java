@@ -26,7 +26,7 @@ public class DataLoaderController {
 
     @GetMapping("/upload")
     public String index() {
-        return "loader/uploadFile";
+        return "admin/uploadFile";
     }
 
     @PostMapping("/uploadExcelFile")
@@ -45,10 +45,10 @@ public class DataLoaderController {
         } catch (Exception e) {
             message = "File cannot be loaded.";
             model.addAttribute("message", message);
-            return "loader/uploadFile";
+            return "admin/uploadFile";
         }
         message = dataLoaderService.dataLoad(fileLocation);
         model.addAttribute("message", message);
-        return "loader/uploadFile";
+        return "admin/uploadFile";
     }
 }

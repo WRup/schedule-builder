@@ -44,7 +44,7 @@ function saveAuditorium(event) {
 }
 
 
-function renderLectureEvent(lecture_title, lecture_start_date, lecture_end_date, group_id, lecture_id, note, color) {
+function renderLectureEvent(lecture_title, lecture_start_date, lecture_end_date, group_id, lecture_id, note, color, hours) {
     var event = {
         title: lecture_title,
         start: moment(lecture_start_date),
@@ -52,7 +52,8 @@ function renderLectureEvent(lecture_title, lecture_start_date, lecture_end_date,
         resourceId: group_id,
         id: lecture_id,
         color: color,
-        description: note
+        description: note,
+        hours: hours
     };
     $('#calendar').fullCalendar('renderEvent', event, true);
     console.log("renderedEvent", event);

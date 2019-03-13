@@ -21,26 +21,28 @@ public class CalendarController {
         this.buildingService = buildingService;
     }
 
-    /*@GetMapping({"/", "/login"})
-    public String login() {
-        return "calendar/login";
-    }*/
-
-    @GetMapping("/scheduler")
+    @GetMapping("/schedulerAdmin")
     public String index(Model model) {
+        generateDataModel(model);
+        return "admin/schedulerAdmin";
+    }
+
+    private void generateDataModel(Model model) {
         model.addAttribute("lectures_event", lectureService.findLecturesByStartDateIsNotNull());
         model.addAttribute("years", yearService.findAll());
         model.addAttribute("buildings", buildingService.findAll());
         model.addAttribute("lectures_external", lectureService.findLecturesByStartDateIsNull());
-        return "calendar/schedulerAdmin";
+    }
+
+    @GetMapping("/schedulerWorker")
+    public String renderWorkerScheduler(Model model) {
+        generateDataModel(model);
+        return "worker/schedulerWorker";
     }
 
     @GetMapping("/schedulerRead")
     public String renderReadScheduler(Model model) {
-        model.addAttribute("lectures_event", lectureService.findLecturesByStartDateIsNotNull());
-        model.addAttribute("years", yearService.findAll());
-        model.addAttribute("buildings", buildingService.findAll());
-        model.addAttribute("lectures_external", lectureService.findLecturesByStartDateIsNull());
-        return "calendar/schedulerRead";
+        generateDataModel(model);
+        return "common/schedulerRead";
     }
 }
