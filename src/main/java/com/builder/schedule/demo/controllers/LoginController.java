@@ -44,7 +44,7 @@ public class LoginController {
     @GetMapping(value = "/access-denied")
     public ModelAndView accessDenied() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("test/access-denied");
+        modelAndView.setViewName("common/access-denied");
         return modelAndView;
     }
 

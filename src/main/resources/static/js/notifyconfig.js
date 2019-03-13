@@ -17,7 +17,7 @@ $(document).ready(function () {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
-    $('#centralModalInfo').modal();
+    //
 });
 
 $("#upload-button").click(function () {
@@ -25,3 +25,7 @@ $("#upload-button").click(function () {
     toastr["success"]('Hi! I am success message.');
 
 });
+
+function showModal() {
+    $('#centralModalInfo').modal();
+}
