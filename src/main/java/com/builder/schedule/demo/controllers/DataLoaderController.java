@@ -45,10 +45,10 @@ public class DataLoaderController {
         } catch (Exception e) {
             message = "File cannot be loaded.";
             model.addAttribute("message", message);
-            return "admin/uploadFile";
+            return "admin/fileUploaded";
         }
         message = dataLoaderService.dataLoad(fileLocation);
         model.addAttribute("message", message);
-        return "admin/uploadFile";
+        return "admin/fileUploaded";
     }
 }

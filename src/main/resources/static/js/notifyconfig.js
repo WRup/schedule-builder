@@ -17,14 +17,19 @@ $(document).ready(function () {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
-    //
 });
 
-$("#upload-button").click(function () {
+function showToastr(message) {
+    console.log("toastr jestem");
+    if (message.includes("Wrong"))
+        toastr["error"](message);
+    else if (message.includes("missing")) {
+        toastr["error"](message);
+    } else if (message.includes("cannot")) {
+        toastr["error"](message);
+    } else toastr["success"](message);
 
-    toastr["success"]('Hi! I am success message.');
-
-});
+}
 
 function showModal() {
     $('#centralModalInfo').modal();
